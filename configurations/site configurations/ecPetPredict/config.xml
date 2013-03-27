@@ -1,0 +1,49 @@
+   <Pipeline name="ECPETPREDICT">
+		<ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="d:/ctpData/ecpetpredict/maastro/roots/dicomImportService"
+			port="50003"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">
+			
+			<!-- <accept calledAET="" />
+			<accept ip="" />
+			<accept callingAET="" />
+			<accept calledAET="" /> -->
+			<accept calledAET="EcPetPredictToBmia" />
+						
+		</ImportService>
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="d:/ctpData/ecpetpredict/maastro/roots/directory-import"
+            minAge="60000"
+            quarantine="d:/ctpData/ecpetpredict/maastro/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="d:/ctpData/ecpetpredict/maastro/roots/dicom-anonymizer"
+            lookupTable="d:/ctpConfig/ecpetpredict/maastro/lookup.properties"
+            script="d:/ctpConfig/ecpetpredict/maastro/anonymizer.properties"
+            quarantine="d:/ctpData/ecpetpredict/maastro/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="d:/ctpData/ecpetpredict/maastro/roots/dicom-filter"
+            script="d:/ctpConfig/ecpetpredict/maastro/filter.script"
+            quarantine="d:/ctpData/ecpetpredict/maastro/quarantines/dicom-filter" />
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="d:/ctpData/ecpetpredict/maastro/roots/export-service" 
+            url="http://ctp.bmia.nl:80"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="yes"
+            acceptZipObjects="yes"
+            acceptFileObjects="yes"
+            interval="5000" />
+   </Pipeline>
