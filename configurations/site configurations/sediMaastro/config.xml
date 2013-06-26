@@ -1,0 +1,36 @@
+<Configuration>
+
+   <Server port="80" />
+
+   <Pipeline name="PIPELINE_NAME">
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/projectName/siteName/roots/directory-import"
+            minAge="60000"
+            quarantine="ctpData/projectName/siteName/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/projectName/siteName/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/projectName/siteName/lookup.properties"
+            script="ctpConfig/projectName/siteName/anonymizer.properties"
+            quarantine="ctpData/projectName/siteName/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/projectName/siteName/roots/dicom-filter"
+            script="ctpConfig/projectName/siteName/filter.script"
+            quarantine="ctpData/projectName/siteName/quarantines/dicom-filter" />
+        <DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0020)/(0008,0060)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/projectName/siteName/roots/storage"
+            quarantine="ctpData/projectName/siteName/quarantines/exportService" />
+   </Pipeline>
+
+</Configuration>
