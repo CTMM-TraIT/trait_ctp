@@ -1,0 +1,63 @@
+<Configuration>
+
+   <Server port="80" />
+
+   <Pipeline name="PIPELINE_NAME">
+		<ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/IMPACT/umcn/roots/dicomImportService"
+			port="104"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">
+			
+			<!-- <accept calledAET="" />
+			<accept ip="" />
+			<accept callingAET="" />
+			<accept calledAET="" /> -->
+						
+		</ImportService>
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/IMPACT/umcn/roots/directory-import"
+            minAge="60000"
+            quarantine="ctpData/IMPACT/umcn/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/IMPACT/umcn/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/IMPACT/umcn/lookup.properties"
+            script="ctpConfig/IMPACT/umcn/anonymizer.properties"
+            quarantine="ctpData/IMPACT/umcn/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/IMPACT/umcn/roots/dicom-filter"
+            script="ctpConfig/IMPACT/umcn/filter.script"
+            quarantine="ctpData/IMPACT/umcn/quarantines/dicom-filter" />
+        <!-- <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/IMPACT/umcn/roots/export-service" 
+            url="http://ctp.bmia.nl:80"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="yes"
+            acceptZipObjects="yes"
+            acceptFileObjects="yes"
+            interval="5000" /> -->
+		<DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0020)/(0008,1030)/(0008,0060)/(0008,103e)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/IMPACT/umcn/roots/storage"
+            quarantine="ctpData/IMPACT/umcn/quarantines/exportService" />
+   </Pipeline>
+
+</Configuration>
