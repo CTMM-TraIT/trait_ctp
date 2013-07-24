@@ -1,0 +1,63 @@
+<Configuration>
+
+   <Server port="80" />
+
+   <Pipeline name="CTMM_HX4">
+		<ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/ctmm_hx4/maastro/roots/dicomImportService"
+			port="104"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">
+			
+			<!-- <accept calledAET="" />
+			<accept ip="" />
+			<accept callingAET="" />
+			<accept calledAET="" /> -->
+						
+		</ImportService>
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/ctmm_hx4/maastro/roots/directory-import"
+            minAge="60000"
+            quarantine="ctpData/ctmm_hx4/maastro/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/ctmm_hx4/maastro/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/ctmm_hx4/maastro/lookup.properties"
+            script="ctpConfig/ctmm_hx4/maastro/anonymizer.properties"
+            quarantine="ctpData/ctmm_hx4/maastro/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/ctmm_hx4/maastro/roots/dicom-filter"
+            script="ctpConfig/ctmm_hx4/maastro/filter.script"
+            quarantine="ctpData/ctmm_hx4/maastro/quarantines/dicom-filter" />
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/ctmm_hx4/maastro/roots/export-service" 
+            url="https://ctp.bmia.nl:443"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="yes"
+            acceptZipObjects="yes"
+            acceptFileObjects="yes"
+            interval="5000" />
+		<!-- <DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0008,0080)/(0010,0020)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/ctmm_hx4/maastro/roots/storage"
+            quarantine="ctpData/ctmm_hx4/maastro/quarantines/exportService" /> -->
+   </Pipeline>
+
+</Configuration>
