@@ -1,6 +1,7 @@
 <Configuration>
-
-   <Server port="80" />
+    <Server
+        maxThreads="20"
+        port="1080"/>
 
    <Pipeline name="CVON_UMC">
 		<ImportService
@@ -8,7 +9,7 @@
 			id="DicomImportService"
             class="org.rsna.ctp.stdstages.DicomImportService"
 			root="ctpData/CVON/UMC/roots/dicomImportService"
-			port="104"
+			port="6106"
 			
             logConnections="yes"
             logDuplicates="no"
@@ -64,5 +65,4 @@
             acceptFileObjects="yes"
             interval="5000" />
    </Pipeline>
-
 </Configuration>
