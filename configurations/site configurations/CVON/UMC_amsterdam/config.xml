@@ -1,0 +1,153 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="1080"/>
+    <Pipeline name="CTP-DICOM Storage with Anonymization">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="no"
+            name="DICOM Server Import"
+            port="8104"
+            quarantine="quarantines/DicomImportService"
+            root="roots/DicomImportService"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="scripts/LookupTable.properties"
+            name="DicomAnonymizer"
+            quarantine="quarantines/DicomAnonymizer"
+            root="roots/DicomAnonymizer"
+            script="scripts/DicomAnonymizer.script"/>
+        <FileStorageService
+            class="org.rsna.ctp.stdstages.FileStorageService"
+            name="DICOM Server File Storage"
+            port="8105"
+            quarantine="quarantines/FileStorageService"
+            returnStoredFile="no"
+            root="roots/FileStorageService"/>
+    </Pipeline>
+
+   <Pipeline name="CVON_UMC">
+		<ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/CVON/UMC/roots/dicomImportService"
+			port="6106"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">						
+		</ImportService>
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/CVON/UMC/roots/directory-import"
+			import="CVON_IMPORT"
+            minAge="1000"
+            quarantine="ctpData/CVON/UMC/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/CVON/UMC/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/CVON/UMC/lookup.properties"
+            script="ctpConfig/CVON/UMC/anonymizer.properties"
+            quarantine="ctpData/CVON/UMC/quarantines/dicom-anonymizer" />
+		<DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/CVON/UMC/lookup.properties"
+            name="XNAT-Anon"
+            quarantine="ctpData/CVON/UMC/quarantines/xnatAnon"
+            root="ctpData/CVON/UMC/roots/xnatAnon"
+            script="ctpConfig/CVON/UMC/DicomAnonymizerXnat.script"/>
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/CVON/UMC/roots/dicom-filter"
+            script="ctpConfig/CVON/UMC/filter.script"
+            quarantine="ctpData/CVON/UMC/quarantines/dicom-filter" />
+		<!-- <DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            cacheID="cache stage ID"
+            structure="(0010,0020)/(0020,000d)/(0020,000e)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/CVON/UMC/fileExport" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes" /> -->
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/CVON/UMC/roots/export-service" 
+            url="https://ctp.bmia.nl:443"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="yes"
+            acceptZipObjects="yes"
+            acceptFileObjects="yes"
+            interval="5000" />
+   </Pipeline>
+<!--
+    <Pipeline name="DICOM De-identification to Local Storage">
+        <ArchiveImportService
+            acceptFileObjects="no"
+            acceptXmlObjects="no"
+            acceptZipObjects="no"
+            class="org.rsna.ctp.stdstages.ArchiveImportService"
+            fsName="DICOM Image Directory"
+            name="ArchiveImportService"
+            quarantine="quarantines/ArchiveImportService"
+            root="roots/ArchiveImportService"
+            treeRoot="archive"/>
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="no"
+            name="DicomImportService"
+            port="7777"
+            quarantine="quarantines/DicomImportService"
+            root="roots/DicomImportService"/>
+        <HttpImportService
+            acceptFileObjects="no"
+            acceptXmlObjects="no"
+            acceptZipObjects="no"
+            class="org.rsna.ctp.stdstages.HttpImportService"
+            logConnections="no"
+            name="HttpImportService"
+            port="7778"
+            quarantine="quarantines/HttpImportService"
+            root="roots/HttpImportService"/>
+        <DicomDecompressor
+            class="org.rsna.ctp.stdstages.DicomDecompressor"
+            name="DicomDecompressor"
+            quarantine="quarantines/DicomDecompressor"
+            root="roots/DicomDecompressor"
+            script="scripts/DicomDecompressor.script"/>
+        <DicomPixelAnonymizer
+            class="org.rsna.ctp.stdstages.DicomPixelAnonymizer"
+            name="DicomPixelAnonymizer"
+            quarantine="quarantines/DicomPixelAnonymizer"
+            root="roots/DicomPixelAnonymizer"
+            script="scripts/DicomPixelAnonymizer.script"/>
+        <IDMap
+            class="org.rsna.ctp.stdstages.IDMap"
+            name="IDMap"
+            root="roots/IDMap"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="scripts/LookupTable.properties"
+            name="DicomAnonymizer"
+            quarantine="quarantines/DicomAnonymizer"
+            root="roots/DicomAnonymizer"
+            script="scripts/DicomAnonymizer.script"/>
+        <FileStorageService
+            class="org.rsna.ctp.stdstages.FileStorageService"
+            name="FileStorageService"
+            quarantine="quarantines/FileStorageService"
+            returnStoredFile="yes"
+            root="roots/FileStorageService"
+            setWorldReadable="yes"
+            setWorldWritable="yes"/>
+    </Pipeline>
+-->
+</Configuration>
