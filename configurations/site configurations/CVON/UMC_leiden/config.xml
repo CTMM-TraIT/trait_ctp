@@ -1,0 +1,49 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="80"
+        requireAuthentication="yes"/>
+    <Pipeline name="PIPELINE_NAME">
+        <DicomImportService
+            callingAETTag="LkebCtp01"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/projectName/siteName/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="roots/DirectoryImportService/import"
+            name="Client Directory Import"
+            quarantine="ctpData/projectName/siteName/quarantines/directory-import"
+            root="ctpData/projectName/siteName/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/projectName/siteName/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/projectName/siteName/quarantines/dicom-anonymizer"
+            root="ctpData/projectName/siteName/roots/dicom-anonymizer"
+            script="ctpConfig/projectName/siteName/anonymizer.properties"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/projectName/siteName/lookup.properties"
+            name="DicomAnonymizer-2"
+            quarantine="ctpData/projectName/siteName/quarantines/dicom-anonymizer-2"
+            root="ctpData/projectName/siteName/roots/dicom-anonymizer-2"
+            script="ctpConfig/projectName/siteName/DicomAnonymizerXnat.script"/>
+		<DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/projectName/siteName/quarantines/dicom-filter"
+            root="ctpData/projectName/siteName/roots/dicom-filter"
+            script="ctpConfig/projectName/siteName/filter.script"/>
+		<HttpExportService
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            name="HTTP Export Service"
+            quarantine="quarantines/HttpExportService"
+            root="ctpData/projectName/siteName/roots/export-service"
+            sendDigestHeader="no"
+            url="https://ctp.bmia.nl:443"/>
+    </Pipeline>
+</Configuration>
