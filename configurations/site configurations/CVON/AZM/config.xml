@@ -1,0 +1,68 @@
+<Configuration>
+
+   <Server port="80" />
+
+   <Pipeline name="CVON_AZM">
+		<ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/CVON/AZM/roots/dicomImportService"
+			port="104"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">						
+		</ImportService>
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/CVON/AZM/roots/directory-import"
+			import="CVON_IMPORT"
+            minAge="1000"
+            quarantine="ctpData/CVON/AZM/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/CVON/AZM/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/CVON/AZM/lookup.properties"
+            script="ctpConfig/CVON/AZM/anonymizer.properties"
+            quarantine="ctpData/CVON/AZM/quarantines/dicom-anonymizer" />
+		<DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/CVON/AZM/lookup.properties"
+            name="XNAT-Anon"
+            quarantine="ctpData/CVON/AZM/quarantines/xnatAnon"
+            root="ctpData/CVON/AZM/roots/xnatAnon"
+            script="ctpConfig/CVON/AZM/DicomAnonymizerXnat.script"/>
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/CVON/AZM/roots/dicom-filter"
+            script="ctpConfig/CVON/AZM/filter.script"
+            quarantine="ctpData/CVON/AZM/quarantines/dicom-filter" />
+		<!-- <DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            cacheID="cache stage ID"
+            structure="(0010,0020)/(0020,000d)/(0020,000e)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/CVON/AZM/fileExport" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes" /> -->
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/CVON/AZM/roots/export-service" 
+            url="https://ctp.bmia.nl:443"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="yes"
+            acceptZipObjects="yes"
+            acceptFileObjects="yes"
+            interval="5000" />
+   </Pipeline>
+
+</Configuration>
