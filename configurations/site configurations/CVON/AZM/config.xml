@@ -21,6 +21,12 @@
 			import="CVON_IMPORT"
             minAge="1000"
             quarantine="ctpData/CVON/AZM/quarantines/directory-import" />
+		<DicomDecompressor
+            name="DicomDecompressor"
+            class="org.rsna.ctp.stdstages.DicomDecompressor"
+            root="ctpData/CVON/AZM/roots/dicom-decompressor" 
+            skipJPEGBaseline="no"
+            quarantine="ctpData/CVON/AZM/quarantines/dicom-decompressor" />
         <DicomAnonymizer
             name="Client DICOM Anonymizer"
             class="org.rsna.ctp.stdstages.DicomAnonymizer"
