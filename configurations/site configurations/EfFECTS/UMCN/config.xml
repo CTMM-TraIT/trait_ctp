@@ -1,0 +1,52 @@
+<Configuration>
+
+   <Server port="80" />
+
+   <Pipeline name="EFFECTS_UMCN">
+		<ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/EFFECTS/UMCN/roots/dicomImportService"
+			port="1104"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">
+			
+			<!-- <accept calledAET="" />
+			<accept ip="" />
+			<accept callingAET="" />
+			<accept calledAET="" /> -->
+						
+		</ImportService>
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/EFFECTS/UMCN/roots/directory-import"
+			import="ctpData/EFFECTS/UMCN/import"
+            minAge="60000"
+            quarantine="ctpData/EFFECTS/UMCN/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/EFFECTS/UMCN/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/EFFECTS/UMCN/lookup.properties"
+            script="ctpConfig/EFFECTS/UMCN/anonymizer.properties"
+            quarantine="ctpData/EFFECTS/UMCN/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/EFFECTS/UMCN/roots/dicom-filter"
+            script="ctpConfig/EFFECTS/UMCN/filter.script"
+            quarantine="ctpData/EFFECTS/UMCN/quarantines/dicom-filter" />
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/EFFECTS/UMCN/roots/export-service" 
+			quarantine="ctpData/EFFECTS/UMCN/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" />
+   </Pipeline>
+
+</Configuration>
