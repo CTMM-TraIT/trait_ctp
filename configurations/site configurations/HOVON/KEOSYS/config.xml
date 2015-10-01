@@ -1,0 +1,52 @@
+<Configuration>
+
+   <Server port="80" />
+
+   <Pipeline name="HOVON_KEOSYS">
+		<ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/HOVON/KEOSYS/roots/dicomImportService"
+			port="1104"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">
+			
+			<!-- <accept calledAET="" />
+			<accept ip="" />
+			<accept callingAET="" />
+			<accept calledAET="" /> -->
+						
+		</ImportService>
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/HOVON/KEOSYS/roots/directory-import"
+			import="ctpData/HOVON/KEOSYS/import"
+            minAge="60000"
+            quarantine="ctpData/HOVON/KEOSYS/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/HOVON/KEOSYS/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/HOVON/KEOSYS/lookup.properties"
+            script="ctpConfig/HOVON/KEOSYS/anonymizer.properties"
+            quarantine="ctpData/HOVON/KEOSYS/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/HOVON/KEOSYS/roots/dicom-filter"
+            script="ctpConfig/HOVON/KEOSYS/filter.script"
+            quarantine="ctpData/HOVON/KEOSYS/quarantines/dicom-filter" />
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/HOVON/KEOSYS/roots/export-service" 
+			quarantine="ctpData/HOVON/KEOSYS/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" />
+   </Pipeline>
+
+</Configuration>
