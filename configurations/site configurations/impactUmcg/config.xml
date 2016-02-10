@@ -7,27 +7,27 @@
         <ImportService
             name="Client Directory Import"
             class="org.rsna.ctp.stdstages.DirectoryImportService"
-			import="/srv/data/sftp/impactumcg/breast_incoming"
-			root="/srv/data/ctpData/IMPACT_MBC/UMCG/roots/directory-import"
+			import="ctpData/IMPACT_MBC/UMCG/import"
+			root="ctpData/IMPACT_MBC/UMCG/roots/directory-import"
             interval="60000"
-			quarantine="/srv/data/ctpData/IMPACT_MBC/UMCG/quarantines/directory-import" />
+			quarantine="ctpData/IMPACT_MBC/UMCG/quarantines/directory-import" />
         <DicomAnonymizer
             name="Client DICOM Anonymizer"
             class="org.rsna.ctp.stdstages.DicomAnonymizer"
-			root="/srv/data/ctpData/IMPACT_MBC/UMCG/roots/dicom-anonymizer"
-			lookupTable="/srv/data/sftp/impactumcg/lookup/breast_lookup.properties"
+			root="ctpData/IMPACT_MBC/UMCG/roots/dicom-anonymizer"
+			lookupTable="ctpConfig/IMPACT_MBC/UMCG/lookup.properties"
             script="ctpConfig/IMPACT_MBC/UMCG/anonymizer.properties"
-			quarantine="/srv/data/sftp/impactumcg/anonymize-failed/MBC/" />
+			quarantine="ctpData/IMPACT_MBC/UMCG/quarantines/dicom-anonymizer" />
 		<Processor
             name="PatientIdFilter"
             class="org.rsna.ctp.stdstages.DicomFilter"
-			root="/srv/data/ctpData/IMPACT_MBC/UMCG/roots/dicom-filter"
+			root="ctpData/IMPACT_MBC/UMCG/roots/dicom-filter"
             script="ctpConfig/IMPACT_MBC/UMCG/filter.script"
-			quarantine="/srv/data/ctpData/IMPACT_MBC/UMCG/quarantines/dicom-filter" />
+			quarantine="ctpData/IMPACT_MBC/UMCG/quarantines/dicom-filter" />
         <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
-			root="/srv/data/ctpData/IMPACT_MBC/UMCG/roots/export-service" 
+			root="ctpData/IMPACT_MBC/UMCG/roots/export-service" 
             url="https://ctp.bmia.nl:443"
             acceptDicomObjects="yes"
             acceptXmlObjects="no"
@@ -40,27 +40,27 @@
         <ImportService
             name="Client Directory Import"
             class="org.rsna.ctp.stdstages.DirectoryImportService"
-			import="/srv/data/sftp/impactumcg/colorectum_incoming"
-			root="/srv/data/ctpData/IMPACT_CRC/UMCG/roots/directory-import"
+			import="ctpData/IMPACT_CRC/UMCG/import"
+			root="ctpData/IMPACT_CRC/UMCG/roots/directory-import"
             interval="60000"
-			quarantine="/srv/data/ctpData/IMPACT_CRC/UMCG/quarantines/directory-import" />
+			quarantine="ctpData/IMPACT_CRC/UMCG/quarantines/directory-import" />
         <DicomAnonymizer
             name="Client DICOM Anonymizer"
             class="org.rsna.ctp.stdstages.DicomAnonymizer"
-			root="/srv/data/ctpData/IMPACT_CRC/UMCG/roots/dicom-anonymizer"
-			lookupTable="/srv/data/sftp/impactumcg/lookup/colorectum_lookup.properties"
+			root="ctpData/IMPACT_CRC/UMCG/roots/dicom-anonymizer"
+			lookupTable="ctpConfig/IMPACT_CRC/UMCG/lookup.properties"
             script="ctpConfig/IMPACT_CRC/UMCG/anonymizer.properties"
-			quarantine="/srv/data/sftp/impactumcg/anonymize-failed/CRC/" />
+			quarantine="ctpData/IMPACT_CRC/UMCG/quarantines/dicom-anonymizer" />
 		<Processor
             name="PatientIdFilter"
             class="org.rsna.ctp.stdstages.DicomFilter"
-			root="/srv/data/ctpData/IMPACT_CRC/UMCG/roots/dicom-filter"
+			root="ctpData/IMPACT_CRC/UMCG/roots/dicom-filter"
             script="ctpConfig/IMPACT_CRC/UMCG/filter.script"
-			quarantine="/srv/data/ctpData/IMPACT_CRC/UMCG/quarantines/dicom-filter" />
+			quarantine="ctpData/IMPACT_CRC/UMCG/quarantines/dicom-filter" />
         <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
-			root="/srv/data/ctpData/IMPACT_CRC/UMCG/roots/export-service" 
+			root="ctpData/IMPACT_CRC/UMCG/roots/export-service" 
             url="https://ctp.bmia.nl:443"
             acceptDicomObjects="yes"
             acceptXmlObjects="no"
@@ -73,27 +73,27 @@
         <ImportService
             name="Client Directory Import"
             class="org.rsna.ctp.stdstages.DirectoryImportService"
-			root="/srv/data/ctpData/IMPACT_RCC/UMCG/roots/directory-import"
-			import="/srv/data/sftp/impactumcg/renal_incoming"
+			root="ctpData/IMPACT_RCC/UMCG/roots/directory-import"
+			import="ctpData/IMPACT_RCC/UMCG/import"
             interval="60000"
-			quarantine="/srv/data/ctpData/IMPACT_RCC/UMCG/quarantines/directory-import" />
+			quarantine="ctpData/IMPACT_RCC/UMCG/quarantines/directory-import" />
         <DicomAnonymizer
             name="Client DICOM Anonymizer"
             class="org.rsna.ctp.stdstages.DicomAnonymizer"
-			root="/srv/data/ctpData/IMPACT_RCC/UMCG/roots/dicom-anonymizer"
-			lookupTable="/srv/data/sftp/impactumcg/lookup/renal_lookup.properties"
+			root="ctpData/IMPACT_RCC/UMCG/roots/dicom-anonymizer"
+			lookupTable="ctpConfig/IMPACT_RCC/UMCG/lookup.properties"
             script="ctpConfig/IMPACT_RCC/UMCG/anonymizer.properties"
-			quarantine="/srv/data/sftp/impactumcg/anonymize-failed/RCC/" />
+			quarantine="ctpData/IMPACT_RCC/UMCG/quarantines/dicom-anonymizer" />
 		<Processor
             name="PatientIdFilter"
             class="org.rsna.ctp.stdstages.DicomFilter"
-			root="/srv/data/ctpData/IMPACT_RCC/UMCG/roots/dicom-filter"
+			root="ctpData/IMPACT_RCC/UMCG/roots/dicom-filter"
             script="ctpConfig/IMPACT_RCC/UMCG/filter.script"
-			quarantine="/srv/data/ctpData/IMPACT_RCC/UMCG/quarantines/dicom-filter" />
+			quarantine="ctpData/IMPACT_RCC/UMCG/quarantines/dicom-filter" />
     	<ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
-			root="/srv/data/ctpData/IMPACT_RCC/UMCG/roots/export-service" 
+			root="ctpData/IMPACT_RCC/UMCG/roots/export-service" 
             url="https://ctp.bmia.nl:443"
             acceptDicomObjects="yes"
             acceptXmlObjects="no"
