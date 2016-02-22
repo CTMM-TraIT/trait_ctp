@@ -1,0 +1,51 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="EFFECTS_MUMC">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="1104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/EFFECTS/MUMC/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="ctpData/EFFECTS/MUMC/import"
+            name="Client Directory Import"
+            quarantine="ctpData/EFFECTS/MUMC/quarantines/directory-import"
+            root="ctpData/EFFECTS/MUMC/roots/directory-import"/>
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/EFFECTS/MUMC/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/EFFECTS/MUMC/lookup.properties"
+            script="ctpConfig/EFFECTS/MUMC/anonymizer.properties"
+            quarantine="ctpData/EFFECTS/MUMC/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/EFFECTS/MUMC/roots/dicom-filter"
+            script="ctpConfig/EFFECTS/MUMC/filter.script"
+            quarantine="ctpData/EFFECTS/MUMC/quarantines/dicom-filter" />
+		<!-- <DirectoryStorageService
+            acceptDuplicates="yes"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            logDuplicates="no"
+            name="DirectoryStorageService"
+            quarantine="ctpData/EFFECTS/MUMC/quarantines/DirectoryStorageService"
+            root="ctpData/EFFECTS/MUMC/roots/storage"
+            setStandardExtensions="yes"
+            structure="(0010,0020)/(0008,1030)/(0008,103E)/(0008,0060)"
+            whitespaceReplacement="_"/> -->
+        <HttpExportService
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            name="HTTP Export Service"
+            quarantine="ctpData/EFFECTS/MUMC/quarantines/export-service"
+            root="ctpData/EFFECTS/MUMC/roots/export-service"
+            sendDigestHeader="yes"
+            url="https://ctp.bmia.nl:443"/>
+		
+    </Pipeline>
+</Configuration>	
