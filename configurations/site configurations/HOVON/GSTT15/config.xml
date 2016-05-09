@@ -1,0 +1,40 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8081"/>
+    <Pipeline name="PETRA_GSTT15">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="1104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/PETRA_GSTT15/StThomas/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="ctpData/PETRA_GSTT15/StThomas/import"
+            name="Client Directory Import"
+            quarantine="ctpData/PETRA_GSTT15/StThomas/quarantines/directory-import"
+            root="ctpData/PETRA_GSTT15/StThomas/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/PETRA_GSTT15/StThomas/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/PETRA_GSTT15/StThomas/quarantines/dicom-anonymizer"
+            root="ctpData/PETRA_GSTT15/StThomas/roots/dicom-anonymizer"
+            script="ctpConfig/PETRA_GSTT15/StThomas/anonymizer.properties"/>
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/PETRA_GSTT15/StThomas/quarantines/dicom-filter"
+            root="ctpData/PETRA_GSTT15/StThomas/roots/dicom-filter"
+            script="ctpConfig/PETRA_GSTT15/StThomas/filter.script"/>
+        <ExportService
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            interval="5000"
+            name="HTTP Export Service"
+            quarantine="ctpData/PETRA_GSTT15/StThomas/quarantines/export-service"
+            root="ctpData/PETRA_GSTT15/StThomas/roots/export-service"
+            url="https://ctp.bmia.nl:443"/>
+    </Pipeline>
+</Configuration>
