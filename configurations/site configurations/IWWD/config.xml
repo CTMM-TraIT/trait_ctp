@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+   <Server port="8080" />
+
+   <Pipeline name="IWWD_MUMC">
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+			import="ctpData/IWWD/MUMC/import"
+			root="ctpData/IWWD/MUMC/roots/directory-import"
+            interval="60000"
+			quarantine="ctpData/IWWD/MUMC/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+			root="ctpData/IWWD/MUMC/roots/dicom-anonymizer"
+			lookupTable="ctpConfig/IWWD/MUMC/lookup.properties"
+            script="ctpConfig/IWWD/MUMC/anonymizer.properties"
+			quarantine="ctpData/IWWD/MUMC/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+			root="ctpData/IWWD/MUMC/roots/dicom-filter"
+            script="ctpConfig/IWWD/MUMC/filter.script"
+			quarantine="ctpData/IWWD/MUMC/quarantines/dicom-filter" />
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+			root="ctpData/IWWD/MUMC/roots/export-service" 
+            url="https://ctp.bmia.nl:443"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="no"
+            acceptZipObjects="no"
+            acceptFileObjects="no"
+            interval="5000" />
+   </Pipeline>
+
+</Configuration>
