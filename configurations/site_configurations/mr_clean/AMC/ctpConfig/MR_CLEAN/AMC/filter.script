@@ -1,0 +1,6 @@
+//This is a filter for specific test cases that should not be processed of the MRCLEAN_R study
+//!SOPClassUID.equals("1.2.840.10008.5.1.4.1.1.7") //accept no Secondary Capture objects 
+!SOPClassUID.equals("1.2.840.10008.5.1.4.1.1.11.1") //accept no Presentation State objects
+* !SOPClassUID.equals("1.2.840.10008.5.1.4.1.1.88.11") //AND accept no Basic Text Structured Report objects
+* !SOPClassUID.equals("1.2.840.10008.5.1.4.1.1.88.22") //AND accept no Enhanced Structured Report objects
+* !SOPClassUID.equals("1.2.840.10008.5.1.4.1.1.88.59") //AND accept no Key Object Selection Document objects
