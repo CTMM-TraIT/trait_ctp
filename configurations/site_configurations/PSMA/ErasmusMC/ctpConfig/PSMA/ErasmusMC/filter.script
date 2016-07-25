@@ -1,1 +1,5 @@
-true.
+!([0008,103e].containsIgnoreCase("topogram") + 
+[0008,103e].containsIgnoreCase("fusion") +
+[0008,103e].containsIgnoreCase("protocol") +
+[0008,0016].equals("1.2.840.10008.5.1.4.1.1.7") +
+[0008,0016].startsWith("1.2.840.10008.5.1.4.1.1.7."))

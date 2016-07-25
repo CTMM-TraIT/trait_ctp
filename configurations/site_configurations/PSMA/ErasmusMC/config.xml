@@ -35,7 +35,7 @@
             root="ctpData/PSMA/ErasmusMC/roots/dicom-filter"
             script="ctpConfig/PSMA/ErasmusMC/filter.script"
             quarantine="ctpData/PSMA/ErasmusMC/quarantines/dicom-filter" />
-		<DirectoryStorageService
+		<!-- <DirectoryStorageService
             name="DirectoryStorageService"
             cacheID="cache stage ID"
             structure="(0010,0020)/(0008,0060)_(0020,000e)"
@@ -46,7 +46,7 @@
             setStandardExtensions="yes"
             filenameTag=""
             acceptDuplicates="yes"
-            returnStoredFile="yes" />
+            returnStoredFile="yes" /> -->
         <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
