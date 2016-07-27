@@ -1,0 +1,65 @@
+<Configuration>
+
+   <Server port="80" />
+
+   <Pipeline name="MR_CLEAN_MUMC">
+		<ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/MR_CLEAN/MUMC/roots/dicomImportService"
+			port="104"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">
+						
+		</ImportService>
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/MR_CLEAN/MUMC/roots/directory-import"
+			import="ctpData/MR_CLEAN/MUMC/import"
+            minAge="60000"
+            quarantine="ctpData/MR_CLEAN/MUMC/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/MR_CLEAN/MUMC/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/MR_CLEAN/MUMC/lookup.properties"
+            script="ctpConfig/MR_CLEAN/MUMC/anonymizer.properties"
+            quarantine="ctpData/MR_CLEAN/MUMC/quarantines/dicom-anonymizer" />
+		<Processor
+            name="Filter1"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/MR_CLEAN/MUMC/roots/dicom-filter"
+            script="ctpConfig/MR_CLEAN/MUMC/filter.script"
+            quarantine="ctpData/MR_CLEAN/MUMC/quarantines/dicom-filter" />
+		<Processor
+            name="Filter2"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/MR_CLEAN/MUMC/roots/dicom-filter"
+            script="ctpConfig/MR_CLEAN/MUMC/filter2.script"
+            quarantine="ctpData/MR_CLEAN/MUMC/quarantines/dicom-filter" />
+		<DirectoryStorageService
+            name="DirectoryStorageService"
+            cacheID="cache stage ID"
+            structure="(0010,0020)/(0008,0060)_(0020,000e)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/MR_CLEAN/MUMC/storage" 
+            setStandardExtensions="yes"
+            filenameTag=""
+            acceptDuplicates="yes"
+            returnStoredFile="yes" />
+        <!-- <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/MR_CLEAN/MUMC/roots/export-service" 
+			quarantine="ctpData/MR_CLEAN/MUMC/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" /> -->
+   </Pipeline>
+
+</Configuration>
