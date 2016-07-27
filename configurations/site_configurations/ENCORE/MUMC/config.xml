@@ -1,0 +1,64 @@
+<Configuration>
+
+   <Server port="80" />
+   
+   <Pipeline name="Encore_MUMC">
+		<!-- <ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/encore/mumc/roots/dicomImportService"
+			port="104"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">
+						
+		</ImportService> -->
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/encore/mumc/roots/directory-import"
+            minAge="60000"
+            quarantine="ctpData/encore/mumc/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/encore/mumc/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/encore/mumc/lookup.properties"
+            script="ctpConfig/encore/mumc/anonymizer.properties"
+            quarantine="ctpData/encore/mumc/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/encore/mumc/roots/dicom-filter"
+            script="ctpConfig/encore/mumc/filter.script"
+            quarantine="ctpData/encore/mumc/quarantines/dicom-filter" />
+		<!-- <DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            dicomScript="scripts/dss.script"
+            cacheID="cache stage ID"
+            structure="(0010,0010)/(0008,1030)/(0008,103E)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/encore/mumc/roots/export" 
+            setStandardExtensions="yes"
+            filenameTag=""
+            acceptDuplicates="yes"
+            returnStoredFile="yes"
+            quarantine="ctpData/encore/mumc/quarantines/export" /> -->
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/encore/mumc/roots/export-service" 
+            url="https://ctp.bmia.nl:443"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="yes"
+            acceptZipObjects="yes"
+            acceptFileObjects="yes"
+            interval="5000" />
+   </Pipeline>
+
+</Configuration>
