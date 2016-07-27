@@ -29,6 +29,12 @@
             lookupTable="ctpConfig/MR_CLEAN/MUMC/lookup.properties"
             script="ctpConfig/MR_CLEAN/MUMC/anonymizer.properties"
             quarantine="ctpData/MR_CLEAN/MUMC/quarantines/dicom-anonymizer" />
+		<DicomAnonymizer
+            name="XnatModifier"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/MR_CLEAN/MUMC/roots/dicom-anonymizer-xnat"
+            script="ctpConfig/MR_CLEAN/MUMC/anonymizerXnat.properties"
+            quarantine="ctpData/MR_CLEAN/MUMC/quarantines/dicom-anonymizer-xnat" />
 		<Processor
             name="Filter1"
             class="org.rsna.ctp.stdstages.DicomFilter"
@@ -41,7 +47,7 @@
             root="ctpData/MR_CLEAN/MUMC/roots/dicom-filter"
             script="ctpConfig/MR_CLEAN/MUMC/filter2.script"
             quarantine="ctpData/MR_CLEAN/MUMC/quarantines/dicom-filter" />
-		<DirectoryStorageService
+		<!-- <DirectoryStorageService
             name="DirectoryStorageService"
             cacheID="cache stage ID"
             structure="(0010,0020)/(0008,0060)_(0020,000e)"
@@ -52,14 +58,14 @@
             setStandardExtensions="yes"
             filenameTag=""
             acceptDuplicates="yes"
-            returnStoredFile="yes" />
-        <!-- <ExportService
+            returnStoredFile="yes" /> -->
+        <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
             root="ctpData/MR_CLEAN/MUMC/roots/export-service" 
 			quarantine="ctpData/MR_CLEAN/MUMC/quarantines/export-service"
             url="https://ctp.bmia.nl:443"
-            interval="5000" /> -->
+            interval="5000" />
    </Pipeline>
 
 </Configuration>
