@@ -1,0 +1,61 @@
+<Configuration>
+
+   <Server port="80" />
+
+   <Pipeline name="UMCU_SCIENCE">
+		<ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/science/umcu/roots/dicomImportService"
+			port="104"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">						
+		</ImportService>
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/science/umcu/roots/directory-import"
+			import="IMPORT"
+            minAge="60000"
+            quarantine="ctpData/science/umcu/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/science/umcu/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/science/umcu/lookup.properties"
+            script="ctpConfig/science/umcu/anonymizer.properties"
+            quarantine="ctpData/science/umcu/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/science/umcu/roots/dicom-filter"
+            script="ctpConfig/science/umcu/filter.script"
+            quarantine="ctpData/science/umcu/quarantines/dicom-filter" />
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/science/umcu/roots/export-service" 
+            url="http://ctp.bmia.nl:80"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="yes"
+            acceptZipObjects="yes"
+            acceptFileObjects="yes"
+            interval="5000" />
+		<!-- <DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0010)/(0008,103e)/(0008,0060)_"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/science/umcu/roots/storage" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes"
+            quarantine="ctpData/science/umcu/quarantines/storage" /> -->
+   </Pipeline>
+
+</Configuration>
