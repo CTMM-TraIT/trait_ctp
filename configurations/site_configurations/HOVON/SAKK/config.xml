@@ -1,0 +1,51 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="PETRA_SAKK">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/PETRA_SAKK/SAKK/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="ctpData/PETRA_SAKK/SAKK/import"
+            name="Client Directory Import"
+            quarantine="ctpData/PETRA_SAKK/SAKK/quarantines/directory-import"
+            root="ctpData/PETRA_SAKK/SAKK/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/PETRA_SAKK/SAKK/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/PETRA_SAKK/SAKK/quarantines/dicom-anonymizer"
+            root="ctpData/PETRA_SAKK/SAKK/roots/dicom-anonymizer"
+            script="ctpConfig/PETRA_SAKK/SAKK/anonymizer.properties"/>
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/PETRA_SAKK/SAKK/quarantines/dicom-filter"
+            root="ctpData/PETRA_SAKK/SAKK/roots/dicom-filter"
+            script="ctpConfig/PETRA_SAKK/SAKK/filter.script"/>
+        <!-- <ExportService
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            interval="5000"
+            name="HTTP Export Service"
+            quarantine="ctpData/PETRA_SAKK/SAKK/quarantines/export-service"
+            root="ctpData/PETRA_SAKK/SAKK/roots/export-service"
+            url="https://ctp.bmia.nl:443"/> -->
+		<DirectoryStorageService
+            name="DirectoryStorageService"
+            cacheID="cache stage ID"
+            structure="(0010,0020)/(0020,000D)/(0008,0060)_(0020,000E)/"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/PETRA_SAKK/SAKK/roots/DirectoryExport" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes"/>
+    </Pipeline>
+</Configuration>
