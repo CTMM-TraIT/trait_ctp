@@ -3,13 +3,12 @@
 
    <Server port="8080" />
 
-   <Pipeline name="IMPACT_MBC_UMCG">
+   <Pipeline name="IMPACT_MRI2">
         <ImportService
             name="Client Directory Import"
             class="org.rsna.ctp.stdstages.DirectoryImportService"
 			import="ctpData/MRI2/import"
 			root="ctpData/MRI2/roots/directory-import"
-            interval="60000"
 			quarantine="ctpData/MRI2/quarantines/directory-import" />
         <DicomAnonymizer
             name="Client DICOM Anonymizer"
