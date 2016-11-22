@@ -1,7 +1,7 @@
 <Configuration>
     <Server
         maxThreads="20"
-        port="80"/>
+        port="8080"/>
     <Pipeline name="PETRA_PETAL">
         <DicomImportService
             class="org.rsna.ctp.stdstages.DicomImportService"
@@ -36,6 +36,17 @@
 			quarantine="ctpData/PETRA_PETAL/Essen/quarantines/export-service"
             url="https://ctp.bmia.nl:443"
             interval="5000" />
+		<!-- <DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0020)/(0020,000e)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/PETRA_PETAL/Essen/roots/output" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes" /> -->
     </Pipeline>
 	
 </Configuration>
