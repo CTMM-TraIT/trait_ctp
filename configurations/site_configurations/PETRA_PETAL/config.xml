@@ -12,7 +12,7 @@
             root="ctpData/PETRA_PETAL/Essen/roots/dicomImportService"/>
         <DirectoryImportService
             class="org.rsna.ctp.stdstages.DirectoryImportService"
-            import="ctpData/PETRA_PETAL/Essen/import"
+            import="_IMPORT"
             name="Client Directory Import"
             quarantine="ctpData/PETRA_PETAL/Essen/quarantines/directory-import"
             root="ctpData/PETRA_PETAL/Essen/roots/directory-import"/>
