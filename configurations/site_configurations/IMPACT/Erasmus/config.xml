@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+   <Server port="8080" />
+
+   <Pipeline name="IMPACT_MBC_EMC">
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+			import="_IMPORT"
+			root="ctpData/IMPACT_MBC/EMC/roots/directory-import"
+            interval="60000"
+			quarantine="ctpData/IMPACT_MBC/EMC/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+			root="ctpData/IMPACT_MBC/EMC/roots/dicom-anonymizer"
+			lookupTable="ctpConfig/IMPACT_MBC/EMC/lookup.properties"
+            script="ctpConfig/IMPACT_MBC/EMC/anonymizer.properties"
+			quarantine="ctpData/IMPACT_MBC/EMC/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+			root="ctpData/IMPACT_MBC/EMC/roots/dicom-filter"
+            script="ctpConfig/IMPACT_MBC/EMC/filter.script"
+			quarantine="ctpData/IMPACT_MBC/EMC/quarantines/dicom-filter" />
+        <!-- <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+			root="ctpData/IMPACT_MBC/EMC/roots/export-service" 
+            url="https://ctp.bmia.nl:443"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="no"
+            acceptZipObjects="no"
+            acceptFileObjects="no"
+            interval="5000" /> -->
+		<DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0010)/(0008,103e)/(0008,0060)_"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/IMPACT_MBC/EMC/roots/storage" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes"
+            quarantine="ctpData/IMPACT_MBC/EMC/quarantines/storage" />
+   </Pipeline>
+
+</Configuration>
