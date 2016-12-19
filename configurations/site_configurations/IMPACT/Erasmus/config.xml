@@ -24,7 +24,7 @@
 			root="ctpData/IMPACT_MBC/EMC/roots/dicom-filter"
             script="ctpConfig/IMPACT_MBC/EMC/filter.script"
 			quarantine="ctpData/IMPACT_MBC/EMC/quarantines/dicom-filter" />
-        <!-- <ExportService
+        <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
 			root="ctpData/IMPACT_MBC/EMC/roots/export-service" 
@@ -33,8 +33,8 @@
             acceptXmlObjects="no"
             acceptZipObjects="no"
             acceptFileObjects="no"
-            interval="5000" /> -->
-		<DirectoryStorageService
+            interval="5000" />
+		<!-- <DirectoryStorageService
             name="DirectoryStorageService"
             id="stage ID"
             structure="(0010,0010)/(0008,103e)/(0008,0060)_"
@@ -45,7 +45,7 @@
             setStandardExtensions="yes"
             acceptDuplicates="yes"
             returnStoredFile="yes"
-            quarantine="ctpData/IMPACT_MBC/EMC/quarantines/storage" />
+            quarantine="ctpData/IMPACT_MBC/EMC/quarantines/storage" /> -->
    </Pipeline>
 
 </Configuration>
