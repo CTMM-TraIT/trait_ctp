@@ -1,1 +1,4 @@
-![0013,1010].matches("Project_A")
+![0013,1010].matches("Project_A") *
+![0008,0060].matches("RTSTRUCT") *
+![0008,0060].matches("RTPLAN") *
+![0008,0060].matches("RTDOSE")
