@@ -3,7 +3,7 @@
 
    <Server port="8080" />
 
-   <Pipeline name="IMPACT_MRI2">
+   <Pipeline name="KWF_MRI2_RECTUM">
         <ImportService
             name="Client Directory Import"
             class="org.rsna.ctp.stdstages.DirectoryImportService"
