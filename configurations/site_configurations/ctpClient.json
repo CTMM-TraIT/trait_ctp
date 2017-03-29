@@ -7,6 +7,10 @@
 		{
 			"name": "science_austria",
 			"location": "SCIENCE/austria/ctpConfig/science/austria/anonymizer.properties"
+		},
+		{
+			"name": "science_denmark",
+			"location": "SCIENCE/denmark/ctpConfig/science/denmark/anonymizer.properties"
 		}
 	]
 }
