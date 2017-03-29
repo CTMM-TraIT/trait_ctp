@@ -3,6 +3,10 @@
 		{
 			"name": "science_umcu",
 			"location": "SCIENCE/umcu/ctpConfig/science/umcu/anonymizer.properties"
+		},
+		{
+			"name": "science_austria",
+			"location": "SCIENCE/austria/ctpConfig/science/austria/anonymizer.properties"
 		}
 	]
 }
