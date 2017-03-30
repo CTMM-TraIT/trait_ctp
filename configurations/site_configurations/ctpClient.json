@@ -11,6 +11,10 @@
 		{
 			"name": "science_denmark",
 			"location": "SCIENCE/denmark/ctpConfig/science/denmark/anonymizer.properties"
+		},
+		{
+			"name": "trait_test_maastro",
+			"location": "CTMM_TRAIT_TEST/ctpConfig/projectName/siteName/anonymizer.properties"
 		}
 	]
 }
