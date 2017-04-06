@@ -15,6 +15,10 @@
 		{
 			"name": "trait_test_maastro",
 			"location": "CTMM_TRAIT_TEST/ctpConfig/projectName/siteName/anonymizer.properties"
+		},
+		{
+			"name": "petra_petal",
+			"location": "PETRA_PETAL/ctpConfig/PETRA_PETAL/Essen/anonymizer.properties"
 		}
 	]
 }
