@@ -19,6 +19,10 @@
 		{
 			"name": "petra_petal",
 			"location": "PETRA_PETAL/ctpConfig/PETRA_PETAL/Essen/anonymizer.properties"
+		},
+		{
+			"name": "petra_bologna",
+			"location": "PETRA_BOLOGNA/ctpConfig/PETRA_BOLOGNA/Essen/anonymizer.properties"
 		}
 	]
 }
