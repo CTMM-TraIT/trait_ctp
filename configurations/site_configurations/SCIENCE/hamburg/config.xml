@@ -1,0 +1,62 @@
+<Configuration>
+
+   <Server port="8080" />
+
+   <Pipeline name="AUSTRIA_SCIENCE">
+		<ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/science/austria/roots/dicomImportService"
+			port="104"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">						
+		</ImportService>
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/science/austria/roots/directory-import"
+			import="_IMPORT"
+            minAge="60000"
+            quarantine="ctpData/science/austria/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/science/austria/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/science/austria/lookup.properties"
+            script="ctpConfig/science/austria/anonymizer.properties"
+            quarantine="ctpData/science/austria/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/science/austria/roots/dicom-filter"
+            script="ctpConfig/science/austria/filter.script"
+            quarantine="ctpData/science/austria/quarantines/dicom-filter" />
+        <!-- <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/science/austria/roots/export-service" 
+            url="https://ctp.bmia.nl:443"
+			maxUnchunked="1000"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="yes"
+            acceptZipObjects="yes"
+            acceptFileObjects="yes"
+            interval="5000" /> -->
+		<DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0010)/(0008,103e)/(0008,0060)_"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/science/austria/roots/storage" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes"
+            quarantine="ctpData/science/austria/quarantines/storage" />
+   </Pipeline>
+
+</Configuration>

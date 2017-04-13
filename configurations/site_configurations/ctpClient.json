@@ -9,6 +9,10 @@
 			"location": "SCIENCE/austria/ctpConfig/science/austria/anonymizer.properties"
 		},
 		{
+			"name": "science_hamburg",
+			"location": "SCIENCE/hamburg/ctpConfig/science/hamburg/anonymizer.properties"
+		},
+		{
 			"name": "science_denmark",
 			"location": "SCIENCE/denmark/ctpConfig/science/denmark/anonymizer.properties"
 		},
