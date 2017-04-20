@@ -28,5 +28,10 @@
 			"name": "petra_bologna",
 			"location": "PETRA_BOLOGNA/ctpConfig/PETRA_BOLOGNA/Bologna/anonymizer.properties"
 		}
+		,
+		{
+			"name": "orchestra_vumc",
+			"location": "Orchestra/VUmc/ctpConfig/ORCHESTRA/VUMC/anonymizer.properties"
+		}
 	]
 }
