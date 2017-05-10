@@ -1,6 +1,6 @@
 <Configuration>
 
-   <Server port="80" />
+   <Server port="8080" />
 
    <Pipeline name="UMCU_SCIENCE">
 		<ImportService
@@ -38,7 +38,7 @@
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
             root="ctpData/science/umcu/roots/export-service" 
-            url="http://ctp.bmia.nl:80"
+            url="https://ctp.bmia.nl:443"
             acceptDicomObjects="yes"
             acceptXmlObjects="yes"
             acceptZipObjects="yes"
