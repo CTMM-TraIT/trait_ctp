@@ -2,12 +2,12 @@
 
    <Server port="8080" />
 
-   <Pipeline name="AUSTRIA_SCIENCE">
+   <Pipeline name="hamburg_SCIENCE">
 		<ImportService
 			name="DicomImportService"
 			id="DicomImportService"
             class="org.rsna.ctp.stdstages.DicomImportService"
-			root="ctpData/science/austria/roots/dicomImportService"
+			root="ctpData/science/hamburg/roots/dicomImportService"
 			port="104"
 			
             logConnections="yes"
@@ -17,27 +17,27 @@
         <ImportService
             name="Client Directory Import"
             class="org.rsna.ctp.stdstages.DirectoryImportService"
-            root="ctpData/science/austria/roots/directory-import"
+            root="ctpData/science/hamburg/roots/directory-import"
 			import="_IMPORT"
             minAge="60000"
-            quarantine="ctpData/science/austria/quarantines/directory-import" />
+            quarantine="ctpData/science/hamburg/quarantines/directory-import" />
         <DicomAnonymizer
             name="Client DICOM Anonymizer"
             class="org.rsna.ctp.stdstages.DicomAnonymizer"
-            root="ctpData/science/austria/roots/dicom-anonymizer"
-            lookupTable="ctpConfig/science/austria/lookup.properties"
-            script="ctpConfig/science/austria/anonymizer.properties"
-            quarantine="ctpData/science/austria/quarantines/dicom-anonymizer" />
+            root="ctpData/science/hamburg/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/science/hamburg/lookup.properties"
+            script="ctpConfig/science/hamburg/anonymizer.properties"
+            quarantine="ctpData/science/hamburg/quarantines/dicom-anonymizer" />
 		<Processor
             name="PatientIdFilter"
             class="org.rsna.ctp.stdstages.DicomFilter"
-            root="ctpData/science/austria/roots/dicom-filter"
-            script="ctpConfig/science/austria/filter.script"
-            quarantine="ctpData/science/austria/quarantines/dicom-filter" />
+            root="ctpData/science/hamburg/roots/dicom-filter"
+            script="ctpConfig/science/hamburg/filter.script"
+            quarantine="ctpData/science/hamburg/quarantines/dicom-filter" />
         <!-- <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
-            root="ctpData/science/austria/roots/export-service" 
+            root="ctpData/science/hamburg/roots/export-service" 
             url="https://ctp.bmia.nl:443"
 			maxUnchunked="1000"
             acceptDicomObjects="yes"
@@ -52,11 +52,11 @@
             defaultString="UNKNOWN"
             whitespaceReplacement="_"
             class="org.rsna.ctp.stdstages.DirectoryStorageService"
-            root="ctpData/science/austria/roots/storage" 
+            root="ctpData/science/hamburg/roots/storage" 
             setStandardExtensions="yes"
             acceptDuplicates="yes"
             returnStoredFile="yes"
-            quarantine="ctpData/science/austria/quarantines/storage" />
+            quarantine="ctpData/science/hamburg/quarantines/storage" />
    </Pipeline>
 
 </Configuration>
