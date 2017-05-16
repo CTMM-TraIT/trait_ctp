@@ -27,11 +27,20 @@
 		{
 			"name": "petra_bologna",
 			"location": "PETRA_BOLOGNA/ctpConfig/PETRA_BOLOGNA/Bologna/anonymizer.properties"
-		}
-		,
+		},
 		{
 			"name": "orchestra_vumc",
 			"location": "Orchestra/VUmc/ctpConfig/ORCHESTRA/VUMC/anonymizer.properties"
+		},
+		{
+			"name": "petra_gstt15",
+			"location": "HOVON/GSTT15/ctpConfig/PETRA_GSTT15/StThomas/anonymizer.properties"
+		},
+		{
+			"name": "petra_hovon",
+			"location": "HOVON/KEOSYS/ctpConfig/HOVON/KEOSYS/anonymizer.properties"
 		}
+
+
 	]
 }
