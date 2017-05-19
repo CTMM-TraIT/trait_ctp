@@ -12,7 +12,7 @@
             root="ctpData/PETRA_GSTT15/StThomas/roots/dicomImportService"/>
         <DirectoryImportService
             class="org.rsna.ctp.stdstages.DirectoryImportService"
-            import="ctpData/PETRA_GSTT15/StThomas/import"
+            import="_IMPORT"
             name="Client Directory Import"
             quarantine="ctpData/PETRA_GSTT15/StThomas/quarantines/directory-import"
             root="ctpData/PETRA_GSTT15/StThomas/roots/directory-import"/>
