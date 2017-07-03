@@ -1,0 +1,52 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="PETRA_NORDUS">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/PETRA_NORDUS/Mount_Sinai/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="_IMPORT"
+            name="Client Directory Import"
+            quarantine="ctpData/PETRA_NORDUS/Mount_Sinai/quarantines/directory-import"
+            root="ctpData/PETRA_NORDUS/Mount_Sinai/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/PETRA_NORDUS/Mount_Sinai/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/PETRA_NORDUS/Mount_Sinai/quarantines/dicom-anonymizer"
+            root="ctpData/PETRA_NORDUS/Mount_Sinai/roots/dicom-anonymizer"
+            script="ctpConfig/PETRA_NORDUS/Mount_Sinai/anonymizer.properties"/>
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/PETRA_NORDUS/Mount_Sinai/quarantines/dicom-filter"
+            root="ctpData/PETRA_NORDUS/Mount_Sinai/roots/dicom-filter"
+            script="ctpConfig/PETRA_NORDUS/Mount_Sinai/filter.script"/>
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/PETRA_NORDUS/Mount_Sinai/roots/export-service" 
+			quarantine="ctpData/PETRA_NORDUS/Mount_Sinai/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" />
+		<!-- <DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0020)/(0020,000e)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/PETRA_NORDUS/Mount_Sinai/roots/output" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes" /> -->
+    </Pipeline>
+	
+</Configuration>
