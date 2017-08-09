@@ -39,8 +39,10 @@
 		{
 			"name": "petra_hovon",
 			"location": "HOVON/KEOSYS/ctpConfig/HOVON/KEOSYS/anonymizer.properties"
+		},
+		{
+			"name": "petra_nordus_denmark",
+			"location": "PETRA_NORDUS/copenhagen/ctpConfig/PETRA_NORDUS/Copenhagen/anonymizer.properties"
 		}
-
-
 	]
 }
