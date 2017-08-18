@@ -34,7 +34,7 @@
             root="ctpData/eDETECT/umcu/roots/dicom-filter"
             script="ctpConfig/eDETECT/umcu/filter.script"
             quarantine="ctpData/eDETECT/umcu/quarantines/dicom-filter" />
-        <!-- <ExportService
+        <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
             root="ctpData/eDETECT/umcu/roots/export-service" 
@@ -43,8 +43,8 @@
             acceptXmlObjects="yes"
             acceptZipObjects="yes"
             acceptFileObjects="yes"
-            interval="5000" /> -->
-		<DirectoryStorageService
+            interval="5000" />
+		<!-- <DirectoryStorageService
             name="DirectoryStorageService"
             id="stage ID"
             structure="(0010,0010)/(0008,103e)/(0008,0060)_"
@@ -55,7 +55,7 @@
             setStandardExtensions="yes"
             acceptDuplicates="yes"
             returnStoredFile="yes"
-            quarantine="ctpData/eDETECT/umcu/quarantines/storage" />
+            quarantine="ctpData/eDETECT/umcu/quarantines/storage" /> -->
    </Pipeline>
 
 </Configuration>
