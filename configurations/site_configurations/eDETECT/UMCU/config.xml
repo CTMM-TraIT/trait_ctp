@@ -1,0 +1,61 @@
+<Configuration>
+
+   <Server port="8080" />
+
+   <Pipeline name="UMCU_eDETECT">
+		<ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/eDETECT/umcu/roots/dicomImportService"
+			port="104"
+			
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no">						
+		</ImportService>
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/eDETECT/umcu/roots/directory-import"
+			import="IMPORT"
+            minAge="60000"
+            quarantine="ctpData/eDETECT/umcu/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/eDETECT/umcu/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/eDETECT/umcu/lookup.properties"
+            script="ctpConfig/eDETECT/umcu/anonymizer.properties"
+            quarantine="ctpData/eDETECT/umcu/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/eDETECT/umcu/roots/dicom-filter"
+            script="ctpConfig/eDETECT/umcu/filter.script"
+            quarantine="ctpData/eDETECT/umcu/quarantines/dicom-filter" />
+        <!-- <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/eDETECT/umcu/roots/export-service" 
+            url="https://ctp.bmia.nl:443"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="yes"
+            acceptZipObjects="yes"
+            acceptFileObjects="yes"
+            interval="5000" /> -->
+		<DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0010)/(0008,103e)/(0008,0060)_"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/eDETECT/umcu/roots/storage" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes"
+            quarantine="ctpData/eDETECT/umcu/quarantines/storage" />
+   </Pipeline>
+
+</Configuration>
