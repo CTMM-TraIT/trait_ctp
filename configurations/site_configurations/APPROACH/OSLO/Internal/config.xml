@@ -1,62 +1,58 @@
 <Configuration>
-
-   <Server port="8080" />
-
-   <Pipeline name="APPROACH_INTERNAL">
-		<ImportService
-			name="DicomImportService"
-			id="DicomImportService"
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="APPROACH_INTERNAL">
+        <DicomImportService
             class="org.rsna.ctp.stdstages.DicomImportService"
-			root="ctpData/APPROACH/OSLO/roots/dicomImportService"
-			port="104"
-			
-            logConnections="yes"
-            logDuplicates="no"
-            suppressDuplicates="no">
-						
-		</ImportService>
-        <ImportService
-            name="Client Directory Import"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/APPROACH/OSLO/roots/dicomImportService"/>
+        <DirectoryImportService
             class="org.rsna.ctp.stdstages.DirectoryImportService"
-            root="ctpData/APPROACH/OSLO/roots/directory-import"
-			import="ctpData/APPROACH/OSLO/import"
-            minAge="60000"
-            quarantine="ctpData/APPROACH/OSLO/quarantines/directory-import" />
+            import="_IMPORT"
+            name="Client Directory Import"
+            quarantine="ctpData/APPROACH/OSLO/quarantines/directory-import"
+            root="ctpData/APPROACH/OSLO/roots/directory-import"/>
         <DicomAnonymizer
-            name="Client DICOM Anonymizer"
             class="org.rsna.ctp.stdstages.DicomAnonymizer"
-            root="ctpData/APPROACH/OSLO/roots/dicom-anonymizer"
             lookupTable="ctpConfig/APPROACH/OSLO/lookup.properties"
-            script="ctpConfig/APPROACH/OSLO/anonymizer.properties"
-            quarantine="ctpData/APPROACH/OSLO/quarantines/dicom-anonymizer" />
-		<DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/APPROACH/OSLO/quarantines/dicom-anonymizer"
+            root="ctpData/APPROACH/OSLO/roots/dicom-anonymizer"
+            script="ctpConfig/APPROACH/OSLO/anonymizer.properties"/>
+        <DicomAnonymizer
             name="XnatModifier"
             class="org.rsna.ctp.stdstages.DicomAnonymizer"
             root="ctpData/APPROACH/OSLO/roots/dicom-anonymizer-xnat"
             script="ctpConfig/APPROACH/OSLO/anonymizerXnat.properties"
             quarantine="ctpData/APPROACH/OSLO/quarantines/dicom-anonymizer-xnat" />
-		<!-- <DirectoryStorageService
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/APPROACH/OSLO/quarantines/dicom-filter"
+            root="ctpData/APPROACH/OSLO/roots/dicom-filter"
+            script="ctpConfig/APPROACH/OSLO/filter.script"/>
+        <!--<ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/APPROACH/OSLO/roots/export-service" 
+			quarantine="ctpData/APPROACH/OSLO/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" /> -->
+		<DirectoryStorageService
             name="DirectoryStorageService"
-            cacheID="cache stage ID"
-            structure="(0010,0020)/(0008,0060)_(0020,000e)"
+            id="stage ID"
+            structure="(0010,0020)/(0020,000e)"
             defaultString="UNKNOWN"
             whitespaceReplacement="_"
             class="org.rsna.ctp.stdstages.DirectoryStorageService"
-            root="ctpData/APPROACH/OSLO/storage" 
+            root="_EXPORT" 
             setStandardExtensions="yes"
-            filenameTag=""
             acceptDuplicates="yes"
-            returnStoredFile="yes" /> -->
-        <DicomExportService
-            calledAETTag="CTP"
-            callingAETTag="CTP"
-            class="org.rsna.ctp.stdstages.DicomExportService"
-            hostTag="localhost"
-            name="DicomExportService"
-            portTag="50104"
-            quarantine="quarantines/DicomExportService"
-            root="roots/DicomExportService"
-            url=""/>
-   </Pipeline>
-
+            returnStoredFile="yes" />
+    </Pipeline>
+	
 </Configuration>
