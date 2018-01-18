@@ -28,6 +28,12 @@
             lookupTable="ctpConfig/eDETECT/umcu/lookup.properties"
             script="ctpConfig/eDETECT/umcu/anonymizer.properties"
             quarantine="ctpData/eDETECT/umcu/quarantines/dicom-anonymizer" />
+        <DicomPixelAnonymizer
+            class="org.rsna.ctp.stdstages.DicomPixelAnonymizer"
+            name="DicomPixelAnonymizer"
+            quarantine="ctpData/eDETECT/umcu/quarantines/dicom-pixel-anonymizer"
+            root="ctpData/eDETECT/umcu/roots/dicom-pixel-anonymizer"
+            script="ctpConfig/eDETECT/umcu/dicom-pixel-anonymizer.script"/>
 		<Processor
             name="PatientIdFilter"
             class="org.rsna.ctp.stdstages.DicomFilter"

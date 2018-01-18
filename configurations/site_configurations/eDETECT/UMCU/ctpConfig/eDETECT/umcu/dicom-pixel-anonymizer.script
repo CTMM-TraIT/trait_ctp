@@ -1,0 +1,4 @@
+MANUFACTUROR
+    {[GROUP,ITEM].containsIgnoreCase("SOMESTRING") *
+    [GROUP,ITEM].containsIgnoreCase("SOMESTRING")}
+    (x,y,width,heigth)
