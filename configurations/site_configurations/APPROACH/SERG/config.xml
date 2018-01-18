@@ -2,7 +2,7 @@
     <Server
         maxThreads="20"
         port="8080"/>
-    <Pipeline name="APPROACH_INTERNAL">
+    <Pipeline name="APPROACH">
         <DicomImportService
             class="org.rsna.ctp.stdstages.DicomImportService"
             logConnections="all"
