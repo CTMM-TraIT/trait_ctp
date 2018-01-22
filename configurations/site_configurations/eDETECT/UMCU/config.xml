@@ -9,7 +9,6 @@
             class="org.rsna.ctp.stdstages.DicomImportService"
 			root="ctpData/eDETECT/umcu/roots/dicomImportService"
 			port="104"
-			
             logConnections="yes"
             logDuplicates="no"
             suppressDuplicates="no">						
@@ -18,9 +17,15 @@
             name="Client Directory Import"
             class="org.rsna.ctp.stdstages.DirectoryImportService"
             root="ctpData/eDETECT/umcu/roots/directory-import"
-			import="IMPORT"
+			import="_IMPORT"
             minAge="60000"
             quarantine="ctpData/eDETECT/umcu/quarantines/directory-import" />
+        <DicomPixelAnonymizer
+            class="org.rsna.ctp.stdstages.DicomPixelAnonymizer"
+            name="DicomPixelAnonymizer"
+            quarantine="ctpData/eDETECT/umcu/quarantines/dicom-pixel-anonymizer"
+            root="ctpData/eDETECT/umcu/roots/dicom-pixel-anonymizer"
+            script="ctpConfig/eDETECT/umcu/dicom-pixel-anonymizer.script"/>
         <DicomAnonymizer
             name="Client DICOM Anonymizer"
             class="org.rsna.ctp.stdstages.DicomAnonymizer"
@@ -28,12 +33,6 @@
             lookupTable="ctpConfig/eDETECT/umcu/lookup.properties"
             script="ctpConfig/eDETECT/umcu/anonymizer.properties"
             quarantine="ctpData/eDETECT/umcu/quarantines/dicom-anonymizer" />
-        <DicomPixelAnonymizer
-            class="org.rsna.ctp.stdstages.DicomPixelAnonymizer"
-            name="DicomPixelAnonymizer"
-            quarantine="ctpData/eDETECT/umcu/quarantines/dicom-pixel-anonymizer"
-            root="ctpData/eDETECT/umcu/roots/dicom-pixel-anonymizer"
-            script="ctpConfig/eDETECT/umcu/dicom-pixel-anonymizer.script"/>
 		<Processor
             name="PatientIdFilter"
             class="org.rsna.ctp.stdstages.DicomFilter"
