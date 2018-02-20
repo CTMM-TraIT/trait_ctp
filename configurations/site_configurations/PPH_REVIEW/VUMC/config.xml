@@ -1,0 +1,52 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="PPH_REVIEW">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/PPH_REVIEW/vumc/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="_IMPORT"
+            name="Client Directory Import"
+            quarantine="ctpData/PPH_REVIEW/vumc/quarantines/directory-import"
+            root="ctpData/PPH_REVIEW/vumc/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/PPH_REVIEW/vumc/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/PPH_REVIEW/vumc/quarantines/dicom-anonymizer"
+            root="ctpData/PPH_REVIEW/vumc/roots/dicom-anonymizer"
+            script="ctpConfig/PPH_REVIEW/vumc/anonymizer.properties"/>
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/PPH_REVIEW/vumc/quarantines/dicom-filter"
+            root="ctpData/PPH_REVIEW/vumc/roots/dicom-filter"
+            script="ctpConfig/PPH_REVIEW/vumc/filter.script"/>
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/PPH_REVIEW/vumc/roots/export-service" 
+			quarantine="ctpData/PPH_REVIEW/vumc/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" />
+		<!-- <DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0020)/(0020,000e)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/PPH_REVIEW/vumc/roots/output" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes" /> -->
+    </Pipeline>
+	
+</Configuration>

@@ -1,0 +1,3 @@
+PHILIPS
+    {[0028,0301].containsIgnoreCase("yes")}
+    (0,0,1024,70)

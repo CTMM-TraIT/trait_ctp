@@ -2,7 +2,7 @@
     <Server
         maxThreads="20"
         port="8080"/>
-    <Pipeline name="APPROACH_INTERNAL">
+    <Pipeline name="APPROACH">
         <DicomImportService
             class="org.rsna.ctp.stdstages.DicomImportService"
             logConnections="all"
@@ -35,14 +35,14 @@
             quarantine="ctpData/APPROACH/LUMC/quarantines/dicom-filter"
             root="ctpData/APPROACH/LUMC/roots/dicom-filter"
             script="ctpConfig/APPROACH/LUMC/filter.script"/>
-        <ExportService
+        <!--<ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
             root="ctpData/APPROACH/LUMC/roots/export-service" 
 			quarantine="ctpData/APPROACH/LUMC/quarantines/export-service"
             url="https://ctp.bmia.nl:443"
-            interval="5000" /> 
-		<!--<DirectoryStorageService
+            interval="5000" /> -->
+		<DirectoryStorageService
             name="DirectoryStorageService"
             id="stage ID"
             structure="(0010,0020)/(0020,000e)"
@@ -52,7 +52,7 @@
             root="_EXPORT" 
             setStandardExtensions="yes"
             acceptDuplicates="yes"
-            returnStoredFile="yes" />-->
+            returnStoredFile="yes" />
     </Pipeline>
 	
 </Configuration>
