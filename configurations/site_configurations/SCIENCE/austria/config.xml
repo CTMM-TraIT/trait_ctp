@@ -34,7 +34,7 @@
             root="ctpData/science/austria/roots/dicom-filter"
             script="ctpConfig/science/austria/filter.script"
             quarantine="ctpData/science/austria/quarantines/dicom-filter" />
-        <!-- <ExportService
+        <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
             root="ctpData/science/austria/roots/export-service" 
@@ -44,8 +44,8 @@
             acceptXmlObjects="yes"
             acceptZipObjects="yes"
             acceptFileObjects="yes"
-            interval="5000" /> -->
-		<DirectoryStorageService
+            interval="5000" />
+        <!-- <DirectoryStorageService
             name="DirectoryStorageService"
             id="stage ID"
             structure="(0010,0010)/(0008,103e)/(0008,0060)_"
@@ -56,7 +56,7 @@
             setStandardExtensions="yes"
             acceptDuplicates="yes"
             returnStoredFile="yes"
-            quarantine="ctpData/science/austria/quarantines/storage" />
+            quarantine="ctpData/science/austria/quarantines/storage" /> -->
    </Pipeline>
 
 </Configuration>

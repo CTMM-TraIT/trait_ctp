@@ -3,7 +3,7 @@
    <Server port="8080" />
 
    <Pipeline name="hamburg_SCIENCE">
-		<ImportService
+       <!-- <ImportService
 			name="DicomImportService"
 			id="DicomImportService"
             class="org.rsna.ctp.stdstages.DicomImportService"
@@ -13,7 +13,7 @@
             logConnections="yes"
             logDuplicates="no"
             suppressDuplicates="no">						
-		</ImportService>
+        </ImportService> -->
         <ImportService
             name="Client Directory Import"
             class="org.rsna.ctp.stdstages.DirectoryImportService"
@@ -34,7 +34,7 @@
             root="ctpData/science/hamburg/roots/dicom-filter"
             script="ctpConfig/science/hamburg/filter.script"
             quarantine="ctpData/science/hamburg/quarantines/dicom-filter" />
-        <!-- <ExportService
+        <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
             root="ctpData/science/hamburg/roots/export-service" 
@@ -44,8 +44,8 @@
             acceptXmlObjects="yes"
             acceptZipObjects="yes"
             acceptFileObjects="yes"
-            interval="5000" /> -->
-		<DirectoryStorageService
+            interval="5000" />
+        <!-- <DirectoryStorageService
             name="DirectoryStorageService"
             id="stage ID"
             structure="(0010,0010)/(0008,103e)/(0008,0060)_"
@@ -56,7 +56,7 @@
             setStandardExtensions="yes"
             acceptDuplicates="yes"
             returnStoredFile="yes"
-            quarantine="ctpData/science/hamburg/quarantines/storage" />
+            quarantine="ctpData/science/hamburg/quarantines/storage" /> -->
    </Pipeline>
 
 </Configuration>

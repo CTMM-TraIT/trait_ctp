@@ -1,6 +1,6 @@
 <Configuration>
 
-   <Server port="80" />
+   <Server port="8080" />
 
    <Pipeline name="DENMARK_SCIENCE">
 		<ImportService
@@ -34,17 +34,17 @@
             root="ctpData/science/denmark/roots/dicom-filter"
             script="ctpConfig/science/denmark/filter.script"
             quarantine="ctpData/science/denmark/quarantines/dicom-filter" />
-        <!-- <ExportService
+        <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
             root="ctpData/science/denmark/roots/export-service" 
-            url="http://ctp.bmia.nl:80"
+            url="https://ctp.bmia.nl:443"
             acceptDicomObjects="yes"
             acceptXmlObjects="yes"
             acceptZipObjects="yes"
             acceptFileObjects="yes"
-            interval="5000" /> -->
-		<DirectoryStorageService
+            interval="5000" />
+        <!-- <DirectoryStorageService
             name="DirectoryStorageService"
             id="stage ID"
             structure="(0010,0010)/(0008,103e)/(0008,0060)_"
@@ -55,7 +55,7 @@
             setStandardExtensions="yes"
             acceptDuplicates="yes"
             returnStoredFile="yes"
-            quarantine="ctpData/science/denmark/quarantines/storage" />
+            quarantine="ctpData/science/denmark/quarantines/storage" /> -->
    </Pipeline>
 
 </Configuration>
