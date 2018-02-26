@@ -53,7 +53,5 @@
             setStandardExtensions="yes"
             acceptDuplicates="yes"
             returnStoredFile="yes" /> 
-    </Pipeline>
-    </Pipeline>
-	
+    </Pipeline>	
 </Configuration>
