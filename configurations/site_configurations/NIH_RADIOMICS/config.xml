@@ -1,0 +1,52 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="NIH_RADIOMICS">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/NIH_RADIOMICS/Tianjin/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="_IMPORT"
+            name="Client Directory Import"
+            quarantine="ctpData/NIH_RADIOMICS/Tianjin/quarantines/directory-import"
+            root="ctpData/NIH_RADIOMICS/Tianjin/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/NIH_RADIOMICS/Tianjin/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/NIH_RADIOMICS/Tianjin/quarantines/dicom-anonymizer"
+            root="ctpData/NIH_RADIOMICS/Tianjin/roots/dicom-anonymizer"
+            script="ctpConfig/NIH_RADIOMICS/Tianjin/anonymizer.properties"/>
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/NIH_RADIOMICS/Tianjin/quarantines/dicom-filter"
+            root="ctpData/NIH_RADIOMICS/Tianjin/roots/dicom-filter"
+            script="ctpConfig/NIH_RADIOMICS/Tianjin/filter.script"/>
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/NIH_RADIOMICS/Tianjin/roots/export-service" 
+			quarantine="ctpData/NIH_RADIOMICS/Tianjin/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" />
+		<!--<DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0020)/(0020,000e)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/NIH_RADIOMICS/Tianjin/roots/output" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes" />-->
+    </Pipeline>
+	
+</Configuration>
