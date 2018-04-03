@@ -35,14 +35,14 @@
             quarantine="ctpData/CP_TAVI/AMC/quarantines/dicom-filter"
             root="ctpData/CP_TAVI/AMC/roots/dicom-filter"
             script="ctpConfig/CP_TAVI/AMC/filter.script"/>
-        <!--<ExportService
+        <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
             root="ctpData/CP_TAVI/AMC/roots/export-service" 
 			quarantine="ctpData/CP_TAVI/AMC/quarantines/export-service"
             url="https://ctp.bmia.nl:443"
-            interval="5000" /> -->
-		<DirectoryStorageService
+            interval="5000" />
+		<!--<DirectoryStorageService
             name="DirectoryStorageService"
             id="stage ID"
             structure="(0010,0020)/(0020,000e)"
@@ -52,7 +52,7 @@
             root="_EXPORT" 
             setStandardExtensions="yes"
             acceptDuplicates="yes"
-            returnStoredFile="yes" />
+            returnStoredFile="yes" />-->
     </Pipeline>
 	
 </Configuration>
