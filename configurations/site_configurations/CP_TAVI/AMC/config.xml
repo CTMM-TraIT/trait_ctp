@@ -1,0 +1,58 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="CP_TAVI">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/CP_TAVI/AMC/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="_IMPORT"
+            name="Client Directory Import"
+            quarantine="ctpData/CP_TAVI/AMC/quarantines/directory-import"
+            root="ctpData/CP_TAVI/AMC/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/CP_TAVI/AMC/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/CP_TAVI/AMC/quarantines/dicom-anonymizer"
+            root="ctpData/CP_TAVI/AMC/roots/dicom-anonymizer"
+            script="ctpConfig/CP_TAVI/AMC/anonymizer.properties"/>
+        <DicomAnonymizer
+            name="XnatModifier"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/CP_TAVI/AMC/roots/dicom-anonymizer-xnat"
+            script="ctpConfig/CP_TAVI/AMC/anonymizerXnat.properties"
+            quarantine="ctpData/CP_TAVI/AMC/quarantines/dicom-anonymizer-xnat" />
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/CP_TAVI/AMC/quarantines/dicom-filter"
+            root="ctpData/CP_TAVI/AMC/roots/dicom-filter"
+            script="ctpConfig/CP_TAVI/AMC/filter.script"/>
+        <!--<ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/CP_TAVI/AMC/roots/export-service" 
+			quarantine="ctpData/CP_TAVI/AMC/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" /> -->
+		<DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0020)/(0020,000e)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="_EXPORT" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes" />
+    </Pipeline>
+	
+</Configuration>
