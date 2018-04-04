@@ -23,6 +23,12 @@
             quarantine="ctpData/ParelAAA/AMC/quarantines/dicom-anonymizer"
             root="ctpData/ParelAAA/AMC/roots/dicom-anonymizer"
             script="ctpConfig/ParelAAA/AMC/anonymizer.properties"/>
+        <DicomAnonymizer
+            name="XnatModifier"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/ParelAAA/AMC/roots/dicom-anonymizer-xnat"
+            script="ctpConfig/ParelAAA/AMC/anonymizerXnat.properties"
+            quarantine="ctpData/ParelAAA/AMC/quarantines/dicom-anonymizer-xnat" />
         <DicomFilter
             class="org.rsna.ctp.stdstages.DicomFilter"
             name="PatientIdFilter"

@@ -9,31 +9,37 @@
             name="DicomImportService"
             port="104"
             quarantine="quarantines/DicomImportService"
-            root="ctpData/ParelAAA/AMC/roots/dicomImportService"/>
+            root="ctpData/ParelAAA/VUMC/roots/dicomImportService"/>
         <DirectoryImportService
             class="org.rsna.ctp.stdstages.DirectoryImportService"
             import="_IMPORT"
             name="Client Directory Import"
-            quarantine="ctpData/ParelAAA/AMC/quarantines/directory-import"
-            root="ctpData/ParelAAA/AMC/roots/directory-import"/>
+            quarantine="ctpData/ParelAAA/VUMC/quarantines/directory-import"
+            root="ctpData/ParelAAA/VUMC/roots/directory-import"/>
         <DicomAnonymizer
             class="org.rsna.ctp.stdstages.DicomAnonymizer"
-            lookupTable="ctpConfig/ParelAAA/AMC/lookup.properties"
+            lookupTable="ctpConfig/ParelAAA/VUMC/lookup.properties"
             name="Client DICOM Anonymizer"
-            quarantine="ctpData/ParelAAA/AMC/quarantines/dicom-anonymizer"
-            root="ctpData/ParelAAA/AMC/roots/dicom-anonymizer"
-            script="ctpConfig/ParelAAA/AMC/anonymizer.properties"/>
+            quarantine="ctpData/ParelAAA/VUMC/quarantines/dicom-anonymizer"
+            root="ctpData/ParelAAA/VUMC/roots/dicom-anonymizer"
+            script="ctpConfig/ParelAAA/VUMC/anonymizer.properties"/>
+        <DicomAnonymizer
+            name="XnatModifier"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/ParelAAA/VUMC/roots/dicom-anonymizer-xnat"
+            script="ctpConfig/ParelAAA/VUMC/anonymizerXnat.properties"
+            quarantine="ctpData/ParelAAA/VUMC/quarantines/dicom-anonymizer-xnat" />
         <DicomFilter
             class="org.rsna.ctp.stdstages.DicomFilter"
             name="PatientIdFilter"
-            quarantine="ctpData/ParelAAA/AMC/quarantines/dicom-filter"
-            root="ctpData/ParelAAA/AMC/roots/dicom-filter"
-            script="ctpConfig/ParelAAA/AMC/filter.script"/>
+            quarantine="ctpData/ParelAAA/VUMC/quarantines/dicom-filter"
+            root="ctpData/ParelAAA/VUMC/roots/dicom-filter"
+            script="ctpConfig/ParelAAA/VUMC/filter.script"/>
         <ExportService
             name="HTTP Export Service"
             class="org.rsna.ctp.stdstages.HttpExportService"
-            root="ctpData/ParelAAA/AMC/roots/export-service" 
-			quarantine="ctpData/ParelAAA/AMC/quarantines/export-service"
+            root="ctpData/ParelAAA/VUMC/roots/export-service" 
+			quarantine="ctpData/ParelAAA/VUMC/quarantines/export-service"
             url="https://ctp.bmia.nl:443"
             interval="5000" />
 		<!-- <DirectoryStorageService
@@ -43,7 +49,7 @@
             defaultString="UNKNOWN"
             whitespaceReplacement="_"
             class="org.rsna.ctp.stdstages.DirectoryStorageService"
-            root="ctpData/ParelAAA/AMC/roots/output" 
+            root="ctpData/ParelAAA/VUMC/roots/output" 
             setStandardExtensions="yes"
             acceptDuplicates="yes"
             returnStoredFile="yes" /> -->
