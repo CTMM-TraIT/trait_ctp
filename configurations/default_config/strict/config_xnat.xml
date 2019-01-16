@@ -1,0 +1,58 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="#PROJECT_NAME#">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/#PROJECT_NAME#/#SITE_NAME#/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="_IMPORT"
+            name="Client Directory Import"
+            quarantine="ctpData/#PROJECT_NAME#/#SITE_NAME#/quarantines/directory-import"
+            root="ctpData/#PROJECT_NAME#/#SITE_NAME#/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/#PROJECT_NAME#/#SITE_NAME#/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/#PROJECT_NAME#/#SITE_NAME#/quarantines/dicom-anonymizer"
+            root="ctpData/#PROJECT_NAME#/#SITE_NAME#/roots/dicom-anonymizer"
+            script="ctpConfig/#PROJECT_NAME#/#SITE_NAME#/anonymizer.properties"/>
+        <DicomAnonymizer
+            name="XnatModifier"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/#PROJECT_NAME#/#SITE_NAME#/roots/dicom-anonymizer-xnat"
+            script="ctpConfig/#PROJECT_NAME#/#SITE_NAME#/anonymizerXnat.properties"
+            quarantine="ctpData/#PROJECT_NAME#/#SITE_NAME#/quarantines/dicom-anonymizer-xnat" />
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/#PROJECT_NAME#/#SITE_NAME#/quarantines/dicom-filter"
+            root="ctpData/#PROJECT_NAME#/#SITE_NAME#/roots/dicom-filter"
+            script="ctpConfig/#PROJECT_NAME#/#SITE_NAME#/filter.script"/>
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/#PROJECT_NAME#/#SITE_NAME#/roots/export-service" 
+			quarantine="ctpData/#PROJECT_NAME#/#SITE_NAME#/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" /> -->
+		<!--<DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0020)/(0020,000e)"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="_EXPORT" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes" /> -->
+    </Pipeline>
+	
+</Configuration>
