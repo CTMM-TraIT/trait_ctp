@@ -9,4 +9,3 @@ if config['archive']!= "xnat" and config['archive']!= "bmia" :
     print("wrong archive selected, please choose xnat or nbia")
     exit()
 
-print("you made it!")

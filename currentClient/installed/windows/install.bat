@@ -1,0 +1,22 @@
+CTP.exe ^
+ //IS//CTP ^
+ --Install="/Users/timlustberg/Downloads/CTP"\windows\CTP.exe ^
+ --Description="RSNA CTP Service" ^
+ --Startup="auto" ^
+ --Jvm=auto ^
+ --StartMode=jvm ^
+ --JvmMs=128 ^
+ --JvmMx=512 ^
+ --Classpath="libraries\CTP.jar" ^
+ --StartPath="/Users/timlustberg/Downloads/CTP" ^
+ --StartClass=org.rsna.ctp.ClinicalTrialProcessor ^
+ --StartMethod=startService ^
+ --StartParams=start ^
+ --StopMode=jvm ^
+ --StopPath="/Users/timlustberg/Downloads/CTP" ^
+ --StopClass=org.rsna.ctp.ClinicalTrialProcessor ^
+ --StopMethod=stopService ^
+ --StopParams=stop ^
+ --LogPath="/Users/timlustberg/Downloads/CTP"\logs ^
+ --StdOutput=auto ^
+ --StdError=auto
