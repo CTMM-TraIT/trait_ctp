@@ -1,6 +1,7 @@
 {
-  "name": "MY_TEST_PROJECT",
-  "site": "MY_TEST_SITE",
+  "name": "test_name",
+  "site": "test_site",
   "uid": "1.1.1.9999",
-  "archive": "xnat"
+  "webport": "8080",
+  "dicomport": "104"
 }
