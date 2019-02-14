@@ -13,32 +13,32 @@ name_upper=`echo "$name" | tr '[:lower:]' '[:upper:]'`
 site_upper=`echo "$site" | tr '[:lower:]' '[:upper:]'` 
 #
 #create folders to store config
-if ! [ -d "../configurations/site_configurations/$name_upper" ]
+if ! [ -d "../site_configurations/$name_upper" ]
 then
-	mkdir "../configurations/site_configurations/$name_upper"
+	mkdir "../site_configurations/$name_upper"
 fi
 #
-if ! [ -d "../configurations/site_configurations/$name_upper/$site_upper" ]
+if ! [ -d "../site_configurations/$name_upper/$site_upper" ]
 then
-    mkdir "../configurations/site_configurations/$name_upper/$site_upper"
-    mkdir "../configurations/site_configurations/$name_upper/$site_upper/ctpConfig"
-    mkdir "../configurations/site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper"
-    mkdir "../configurations/site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper/$site_upper"
+    mkdir "../site_configurations/$name_upper/$site_upper"
+    mkdir "../site_configurations/$name_upper/$site_upper/ctpConfig"
+    mkdir "../site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper"
+    mkdir "../site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper/$site_upper"
 else
     echo "$name_upper/$site_upper config exists, cannot overwrite existing config"
     exit
 fi 
 #
 #copy template files to new project
-config_xml="../configurations/site_configurations/$name_upper/$site_upper/config.xml"
-anonymizer_xml="../configurations/site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper/$site_upper/anonymizer.properties"
-anonymizerXnat_xml="../configurations/site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper/$site_upper/anonymizerXnat.properties"
+config_xml="../site_configurations/$name_upper/$site_upper/config.xml"
+anonymizer_xml="../site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper/$site_upper/anonymizer.properties"
+anonymizerXnat_xml="../site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper/$site_upper/anonymizerXnat.properties"
 #
 cp "./template/config.xml" $config_xml
 cp "./template/anonymizer.properties" $anonymizer_xml
 cp "./template/anonymizerXnat.properties" $anonymizerXnat_xml
-cp "./template/filter.script" "../configurations/site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper/$site_upper/filter.script"
-cp "./template/lookup.properties" "../configurations/site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper/$site_upper/lookup.properties"
+cp "./template/filter.script" "../site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper/$site_upper/filter.script"
+cp "./template/lookup.properties" "../site_configurations/$name_upper/$site_upper/ctpConfig/$name_upper/$site_upper/lookup.properties"
 #
 #update template files
 sed -i -e 's/${name}/'"$name_upper"'/g' $config_xml

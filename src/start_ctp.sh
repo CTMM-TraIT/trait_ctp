@@ -9,7 +9,7 @@ name="$( jq -r '.name' "$config_file" )"
 site="$( jq -r '.site' "$config_file" )"
 name_upper=`echo "$name" | tr '[:lower:]' '[:upper:]'` 
 site_upper=`echo "$site" | tr '[:lower:]' '[:upper:]'` 
-CONFIG_FOLDER="../configurations/site_configurations/$name_upper/$site_upper"
+CONFIG_FOLDER="../site_configurations/$name_upper/$site_upper"
 #
 # delete config and data folder
 rm -rf "$CTP_FOLDER"
