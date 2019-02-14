@@ -1,5 +1,4 @@
 # trait_ctp
-==========
 
 ## info
 CTMM-TraIT CTP repository to:
@@ -34,6 +33,6 @@ follow these steps to generate a new configuration:
 
 ## building custimized pipelines
 if the standard pipeline does not for a collection/site use these steps to create custom pipelines:
-7. go to /site_configurations/[COLLECTION_NAME]/[SITE_NAME] and alter the config.xml or the anonymizer.properties
-8. make sure the pipeline_config.json matches the settings of the pipeline you want to test
-9. after changes redo step 4.to 6.
+* go to /site_configurations/[COLLECTION_NAME]/[SITE_NAME] and alter the config.xml or the anonymizer.properties
+* make sure the pipeline_config.json matches the settings of the pipeline you want to test
+* after changes redo step 4.to 6.
