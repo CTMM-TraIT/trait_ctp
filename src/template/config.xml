@@ -1,0 +1,47 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="${webport}"/>
+    <Pipeline name="${name}">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="${dicomport}"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/${name}/${site}/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="_IMPORT"
+            name="Client Directory Import"
+            quarantine="ctpData/${name}/${site}/quarantines/directory-import"
+            root="ctpData/${name}/${site}/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/${name}/${site}/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/${name}/${site}/quarantines/dicom-anonymizer"
+            root="ctpData/${name}/${site}/roots/dicom-anonymizer"
+            script="ctpConfig/${name}/${site}/anonymizer.properties"/>
+        <DicomAnonymizer
+            name="XnatModifier"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/${name}/${site}/roots/dicom-anonymizer-xnat"
+            script="ctpConfig/${name}/${site}/anonymizerXnat.properties"
+            quarantine="ctpData/${name}/${site}/quarantines/dicom-anonymizer-xnat" />
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/${name}/${site}/quarantines/dicom-filter"
+            root="ctpData/${name}/${site}/roots/dicom-filter"
+            script="ctpConfig/${name}/${site}/filter.script"/>
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/${name}/${site}/roots/export-service" 
+			quarantine="ctpData/${name}/${site}/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" />
+    </Pipeline>
+	
+</Configuration>
