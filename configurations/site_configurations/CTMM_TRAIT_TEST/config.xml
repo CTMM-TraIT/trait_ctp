@@ -1,13 +1,13 @@
 <Configuration>
 
-   <Server port="80" />
+   <Server port="8080" />
 
    <Pipeline name="PIPELINE_NAME">
         <ImportService
             name="Client Directory Import"
             class="org.rsna.ctp.stdstages.DirectoryImportService"
             root="ctpData/projectName/siteName/roots/directory-import"
-            minAge="60000"
+            import="_IMPORT"
             quarantine="ctpData/projectName/siteName/quarantines/directory-import" />
         <DicomAnonymizer
             name="Client DICOM Anonymizer"
@@ -16,21 +16,16 @@
             lookupTable="ctpConfig/projectName/siteName/lookup.properties"
             script="ctpConfig/projectName/siteName/anonymizer.properties"
             quarantine="ctpData/projectName/siteName/quarantines/dicom-anonymizer" />
-		<Processor
-            name="PatientIdFilter"
-            class="org.rsna.ctp.stdstages.DicomFilter"
-            root="ctpData/projectName/siteName/roots/dicom-filter"
-            script="ctpConfig/projectName/siteName/filter.script"
-            quarantine="ctpData/projectName/siteName/quarantines/dicom-filter" />
-        <DirectoryStorageService
-            name="DirectoryStorageService"
-            id="stage ID"
-            structure="(0010,0020)/(0008,0060)"
-            defaultString="UNKNOWN"
-            whitespaceReplacement="_"
-            class="org.rsna.ctp.stdstages.DirectoryStorageService"
-            root="ctpData/projectName/siteName/roots/storage"
-            quarantine="ctpData/projectName/siteName/quarantines/exportService" />
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/science/umcu/roots/export-service" 
+            url="https://ctp-acc.bmia.nl:443"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="yes"
+            acceptZipObjects="yes"
+            acceptFileObjects="yes"
+            interval="5000" />
    </Pipeline>
 
 </Configuration>
