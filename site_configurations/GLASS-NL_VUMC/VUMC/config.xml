@@ -1,0 +1,47 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="GLASS-NL_VUMC">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/GLASS-NL_VUMC/VUMC/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="_IMPORT"
+            name="Client Directory Import"
+            quarantine="ctpData/GLASS-NL_VUMC/VUMC/quarantines/directory-import"
+            root="ctpData/GLASS-NL_VUMC/VUMC/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/GLASS-NL_VUMC/VUMC/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/GLASS-NL_VUMC/VUMC/quarantines/dicom-anonymizer"
+            root="ctpData/GLASS-NL_VUMC/VUMC/roots/dicom-anonymizer"
+            script="ctpConfig/GLASS-NL_VUMC/VUMC/anonymizer.properties"/>
+        <DicomAnonymizer
+            name="XnatModifier"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/GLASS-NL_VUMC/VUMC/roots/dicom-anonymizer-xnat"
+            script="ctpConfig/GLASS-NL_VUMC/VUMC/anonymizerXnat.properties"
+            quarantine="ctpData/GLASS-NL_VUMC/VUMC/quarantines/dicom-anonymizer-xnat" />
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/GLASS-NL_VUMC/VUMC/quarantines/dicom-filter"
+            root="ctpData/GLASS-NL_VUMC/VUMC/roots/dicom-filter"
+            script="ctpConfig/GLASS-NL_VUMC/VUMC/filter.script"/>
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/GLASS-NL_VUMC/VUMC/roots/export-service" 
+			quarantine="ctpData/GLASS-NL_VUMC/VUMC/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" />
+    </Pipeline>
+	
+</Configuration>

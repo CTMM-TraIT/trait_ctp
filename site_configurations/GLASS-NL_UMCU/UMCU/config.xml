@@ -1,0 +1,47 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="GLASS-NL_UMCU">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/GLASS-NL_UMCU/UMCU/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="_IMPORT"
+            name="Client Directory Import"
+            quarantine="ctpData/GLASS-NL_UMCU/UMCU/quarantines/directory-import"
+            root="ctpData/GLASS-NL_UMCU/UMCU/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/GLASS-NL_UMCU/UMCU/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/GLASS-NL_UMCU/UMCU/quarantines/dicom-anonymizer"
+            root="ctpData/GLASS-NL_UMCU/UMCU/roots/dicom-anonymizer"
+            script="ctpConfig/GLASS-NL_UMCU/UMCU/anonymizer.properties"/>
+        <DicomAnonymizer
+            name="XnatModifier"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/GLASS-NL_UMCU/UMCU/roots/dicom-anonymizer-xnat"
+            script="ctpConfig/GLASS-NL_UMCU/UMCU/anonymizerXnat.properties"
+            quarantine="ctpData/GLASS-NL_UMCU/UMCU/quarantines/dicom-anonymizer-xnat" />
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/GLASS-NL_UMCU/UMCU/quarantines/dicom-filter"
+            root="ctpData/GLASS-NL_UMCU/UMCU/roots/dicom-filter"
+            script="ctpConfig/GLASS-NL_UMCU/UMCU/filter.script"/>
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/GLASS-NL_UMCU/UMCU/roots/export-service" 
+			quarantine="ctpData/GLASS-NL_UMCU/UMCU/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" />
+    </Pipeline>
+	
+</Configuration>
