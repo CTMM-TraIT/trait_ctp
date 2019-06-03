@@ -28,11 +28,11 @@ follow these steps to generate a new configuration:
     - login to xnat, the prearchive should have a new study with 10 CT-slices for patient "_trait_admin_test"
 6. if the configuration is correct:
     - run "sh clean_ctp.sh", this is the same script will clean the ./scr/CTP folder
-    - zip ./src/CTP for redistribution
+    - add the ./src/"CTP_[COLLECTION_NAME] [SITE_NAME].zip" to topdesk for redistribution
     - git commit/push
 
 ## building custimized pipelines
-if the standard pipeline does not for a collection/site use these steps to create custom pipelines:
+if the standard pipeline does not fulfill the requirements for a collection/site use these steps to create custom pipelines:
 * go to /site_configurations/[COLLECTION_NAME]/[SITE_NAME] and alter the config.xml or the anonymizer.properties
 * make sure the pipeline_config.json matches the settings of the pipeline you want to test
 * after changes redo step 4.to 6.
