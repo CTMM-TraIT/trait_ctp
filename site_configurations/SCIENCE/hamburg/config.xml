@@ -3,23 +3,20 @@
    <Server port="8080" />
 
    <Pipeline name="hamburg_SCIENCE">
-       <!-- <ImportService
+       <ImportService
 			name="DicomImportService"
 			id="DicomImportService"
             class="org.rsna.ctp.stdstages.DicomImportService"
 			root="ctpData/science/hamburg/roots/dicomImportService"
 			port="104"
-			
             logConnections="yes"
             logDuplicates="no"
-            suppressDuplicates="no">						
-        </ImportService> -->
+            suppressDuplicates="no" />					
         <ImportService
             name="Client Directory Import"
             class="org.rsna.ctp.stdstages.DirectoryImportService"
             root="ctpData/science/hamburg/roots/directory-import"
 			import="_IMPORT"
-            minAge="60000"
             quarantine="ctpData/science/hamburg/quarantines/directory-import" />
         <DicomAnonymizer
             name="Client DICOM Anonymizer"
