@@ -1,0 +1,7 @@
+{
+  "name": "test_name",
+  "site": "test_site",
+  "uid": "1.1.1.9999",
+  "webport": "8080",
+  "dicomport": "104"
+}

@@ -1,0 +1,59 @@
+<Configuration>
+
+   <Server port="8080" />
+
+   <Pipeline name="hamburg_SCIENCE">
+       <ImportService
+			name="DicomImportService"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="ctpData/science/hamburg/roots/dicomImportService"
+			port="104"
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no" />					
+        <ImportService
+            name="Client Directory Import"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="ctpData/science/hamburg/roots/directory-import"
+			import="_IMPORT"
+            quarantine="ctpData/science/hamburg/quarantines/directory-import" />
+        <DicomAnonymizer
+            name="Client DICOM Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/science/hamburg/roots/dicom-anonymizer"
+            lookupTable="ctpConfig/science/hamburg/lookup.properties"
+            script="ctpConfig/science/hamburg/anonymizer.properties"
+            quarantine="ctpData/science/hamburg/quarantines/dicom-anonymizer" />
+		<Processor
+            name="PatientIdFilter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            root="ctpData/science/hamburg/roots/dicom-filter"
+            script="ctpConfig/science/hamburg/filter.script"
+            quarantine="ctpData/science/hamburg/quarantines/dicom-filter" />
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/science/hamburg/roots/export-service" 
+            url="https://ctp.bmia.nl:443"
+			maxUnchunked="1000"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="yes"
+            acceptZipObjects="yes"
+            acceptFileObjects="yes"
+            interval="5000" />
+        <!-- <DirectoryStorageService
+            name="DirectoryStorageService"
+            id="stage ID"
+            structure="(0010,0010)/(0008,103e)/(0008,0060)_"
+            defaultString="UNKNOWN"
+            whitespaceReplacement="_"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            root="ctpData/science/hamburg/roots/storage" 
+            setStandardExtensions="yes"
+            acceptDuplicates="yes"
+            returnStoredFile="yes"
+            quarantine="ctpData/science/hamburg/quarantines/storage" /> -->
+   </Pipeline>
+
+</Configuration>

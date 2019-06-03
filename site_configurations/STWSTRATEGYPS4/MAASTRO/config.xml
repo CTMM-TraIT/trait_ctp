@@ -1,0 +1,40 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="STWSTRATEGYPS4">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/STWSTRATEGYPS4/MAASTRO/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="_IMPORT"
+            name="Client Directory Import"
+            quarantine="ctpData/STWSTRATEGYPS4/MAASTRO/quarantines/directory-import"
+            root="ctpData/STWSTRATEGYPS4/MAASTRO/roots/directory-import"/>
+        <DicomAnonymizer
+            name="XnatModifier"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            root="ctpData/STWSTRATEGYPS4/MAASTRO/roots/dicom-anonymizer-xnat"
+            script="ctpConfig/STWSTRATEGYPS4/MAASTRO/anonymizerXnat.properties"
+            quarantine="ctpData/STWSTRATEGYPS4/MAASTRO/quarantines/dicom-anonymizer-xnat" />
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/STWSTRATEGYPS4/MAASTRO/quarantines/dicom-filter"
+            root="ctpData/STWSTRATEGYPS4/MAASTRO/roots/dicom-filter"
+            script="ctpConfig/STWSTRATEGYPS4/MAASTRO/filter.script"/>
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/STWSTRATEGYPS4/MAASTRO/roots/export-service" 
+			quarantine="ctpData/STWSTRATEGYPS4/MAASTRO/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" />
+    </Pipeline>
+	
+</Configuration>

@@ -1,0 +1,41 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+    <Pipeline name="PETRA_HOVON130">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="quarantines/DicomImportService"
+            root="ctpData/PETRA_HOVON130/VUMC/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="_IMPORT"
+            name="Client Directory Import"
+            quarantine="ctpData/PETRA_HOVON130/VUMC/quarantines/directory-import"
+            root="ctpData/PETRA_HOVON130/VUMC/roots/directory-import"/>
+        <DicomAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="ctpConfig/PETRA_HOVON130/VUMC/lookup.properties"
+            name="Client DICOM Anonymizer"
+            quarantine="ctpData/PETRA_HOVON130/VUMC/quarantines/dicom-anonymizer"
+            root="ctpData/PETRA_HOVON130/VUMC/roots/dicom-anonymizer"
+            script="ctpConfig/PETRA_HOVON130/VUMC/anonymizer.properties"/>
+        <DicomFilter
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            name="PatientIdFilter"
+            quarantine="ctpData/PETRA_HOVON130/VUMC/quarantines/dicom-filter"
+            root="ctpData/PETRA_HOVON130/VUMC/roots/dicom-filter"
+            script="ctpConfig/PETRA_HOVON130/VUMC/filter.script"/>
+        <ExportService
+            name="HTTP Export Service"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            root="ctpData/PETRA_HOVON130/VUMC/roots/export-service" 
+			quarantine="ctpData/PETRA_HOVON130/VUMC/quarantines/export-service"
+            url="https://ctp.bmia.nl:443"
+            interval="5000" />
+    </Pipeline>
+	
+</Configuration>
