@@ -20,3 +20,6 @@ rm "$CTP_FOLDER/config.xml"
 cp "$CONFIG_FOLDER/config.xml" "$CTP_FOLDER/config.xml"
 cp -R "$CONFIG_FOLDER/ctpConfig/" "$CTP_FOLDER/ctpConfig"
 rm "$CTP_FOLDER/ctpConfig/$name_upper/$site_upper/lookup.properties"
+#
+#  create a zip of the CTP
+zip -r "CTP $name_upper $site_upper .zip" "$CTP_FOLDER"
