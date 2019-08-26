@@ -9,8 +9,8 @@ webport="$( jq -r '.webport' "$config_file" )"
 dicomport="$( jq -r '.dicomport' "$config_file" )"
 #
 #create UPPPER_CASE variables
-name_upper=`echo "$name" | tr '[:lower:]' '[:upper:]'` 
-site_upper=`echo "$site" | tr '[:lower:]' '[:upper:]'` 
+name_upper=`echo "$name" | tr '[:lower:]'` 
+site_upper=`echo "$site" | tr '[:lower:]'` 
 #
 #create folders to store config
 if ! [ -d "../site_configurations/$name_upper" ]
