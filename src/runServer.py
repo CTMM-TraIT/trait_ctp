@@ -10,6 +10,12 @@ def index():
 
 @app.route('/', methods=["POST"])
 def searchResult():
+    commandLine = "rm -f CTP_*.zip"
+    p = subprocess.Popen(commandLine, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    out, err = p.communicate()
+    log = out.decode("utf-8")  + "\r\n" + err.decode("utf-8")
+    print(log)
+
     settings = {
         "name": "test_name",
         "site": "test_site",
