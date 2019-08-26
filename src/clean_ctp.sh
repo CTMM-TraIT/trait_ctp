@@ -22,4 +22,4 @@ cp -R "$CONFIG_FOLDER/ctpConfig/" "$CTP_FOLDER/ctpConfig"
 rm "$CTP_FOLDER/ctpConfig/$name_upper/$site_upper/lookup.properties"
 #
 #  create a zip of the CTP
-zip -r "CTP $name_upper $site_upper .zip" "$CTP_FOLDER"
+zip -r "CTP_${name_upper}_${site_upper}.zip" "$CTP_FOLDER"

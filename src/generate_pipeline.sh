@@ -45,15 +45,15 @@ sed -i -e 's/${name}/'"$name_upper"'/g' $config_xml
 sed -i -e 's/${site}/'"$site_upper"'/g' $config_xml
 sed -i -e 's/${webport}/'"$webport"'/g' $config_xml
 sed -i -e 's/${dicomport}/'"$dicomport"'/g' $config_xml
-rm "$config_xml-e"
+#rm "$config_xml-e"
 #
 sed -i -e 's/${name}/'"$name_upper"'/g' $anonymizer_xml
 sed -i -e 's/${site}/'"$site_upper"'/g' $anonymizer_xml
 sed -i -e 's/${uid}/'"$uid"'/g' $anonymizer_xml
-rm "$anonymizer_xml-e"
+#rm "$anonymizer_xml-e"
 #
 sed -i -e 's/${name}/'"$name"'/g' $anonymizerXnat_xml
 sed -i -e 's/${site}/'"$site"'/g' $anonymizerXnat_xml
-rm "$anonymizerXnat_xml-e"
+#rm "$anonymizerXnat_xml-e"
 #
 echo "ctp config generation done"
