@@ -46,7 +46,7 @@ def searchResult():
     log = out.decode("utf-8")  + "\r\n" + err.decode("utf-8")
     print(log)
 
-    fileNameCtpZip = "CTP_" + settings["name"].upper() + "_" + settings["site"].upper() + ".zip"
+    fileNameCtpZip = "CTP_" + settings["name"].lower() + "_" + settings["site"].lower() + ".zip"
     return send_file(fileNameCtpZip, as_attachment=True, attachment_filename=fileNameCtpZip)
 
 
