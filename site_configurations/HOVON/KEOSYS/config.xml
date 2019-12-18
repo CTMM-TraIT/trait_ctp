@@ -24,8 +24,8 @@
             name="Client Directory Import"
             class="org.rsna.ctp.stdstages.DirectoryImportService"
             root="ctpData/HOVON/KEOSYS/roots/directory-import"
-			import="ctpData/HOVON/KEOSYS/import"
-            minAge="60000"
+			import="_IMPORT"
+            minAge="1000"
             quarantine="ctpData/HOVON/KEOSYS/quarantines/directory-import" />
         <DicomAnonymizer
             name="Client DICOM Anonymizer"
