@@ -1,7 +1,7 @@
 <Configuration>
     <Server
         maxThreads="20"
-        port="8080"/>
+        port="80"/>
     <Pipeline name="PETRA_HOVON130">
         <DicomImportService
             class="org.rsna.ctp.stdstages.DicomImportService"
@@ -16,6 +16,14 @@
             name="Client Directory Import"
             quarantine="ctpData/PETRA_HOVON130/VUMC/quarantines/directory-import"
             root="ctpData/PETRA_HOVON130/VUMC/roots/directory-import"/>
+        <DicomDecompressor
+            name="DicomDecompressor"
+            id="stage ID"
+            class="org.rsna.ctp.stdstages.DicomDecompressor"
+            root="root-directory" 
+            skipJPEGBaseline="no"
+            script="ctpConfig/PETRA_HOVON130/VUMC/dicom-decompressor.script"
+            quarantine="ctpData/PETRA_HOVON130/VUMC/quarantines/dicom-decompressor" />
         <DicomAnonymizer
             class="org.rsna.ctp.stdstages.DicomAnonymizer"
             lookupTable="ctpConfig/PETRA_HOVON130/VUMC/lookup.properties"
