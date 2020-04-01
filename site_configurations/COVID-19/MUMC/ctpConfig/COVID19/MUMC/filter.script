@@ -1,0 +1,1 @@
+[0008,0016].startsWith("1.2.840.10008.5.1.4.1.1.2") * ![0008,103E].containsIgnoreCase("topogram")
