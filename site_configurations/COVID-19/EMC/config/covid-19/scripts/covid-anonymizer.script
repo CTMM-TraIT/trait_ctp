@@ -2,21 +2,7 @@
   <p t="NOTICE1">IMPORTANT: Be sure to review Series Descriptions for PHI!!</p>
   <p t="NOTICE2">IMPORTANT: Tags inside of sequences may contain PHI.</p>
   <p t="PROFILENAME">COVID19-EMC-V0.1</p>
-  <p t="UIDROOT"></p>
-  <e en="F" t="00080082" n="InstitutionCodeSeq">@remove()</e>
-  <e en="F" t="0008103e" n="SeriesDescription">@keep()</e>
-  <e en="F" t="00081090" n="ManufacturerModelName">@keep()</e>
-  <e en="F" t="00120030" n="ClinicalTrialSiteID">@remove()</e>
-  <e en="F" t="00120031" n="ClinicalTrialSiteName">@remove()</e>
-  <e en="F" t="00120040" n="ClinicalTrialSubjectID">@remove()</e>
-  <e en="F" t="00209158" n="FrameComments">@remove()</e>
-  <e en="F" t="00280301" n="BurnedInAnnotation">@keep()</e>
-  <e en="F" t="00380004" n="RefPatientAliasSeq">@remove()</e>
-  <e en="F" t="00400003" n="SPSStartTime">@keep()</e>
-  <e en="F" t="00400005" n="SPSEndTime">@keep()</e>
-  <e en="F" t="00400245" n="PPSStartTime">@keep()</e>
-  <e en="F" t="00401001" n="RequestedProcedureID">@remove()</e>
-  <e en="F" t="0040a073" n="VerifyingObserverSeq">@remove()</e>
+  <p t="UIDROOT">1.3.6.1.4.1.40744.158</p>
   <e en="T" t="00001000" n="AffectedSOPInstanceUID">@remove()</e>
   <e en="T" t="00001001" n="RequestedSOPInstanceUID">@hashuid(@UIDROOT,this)</e>
   <e en="T" t="00020003" n="MediaStorageSOPInstanceUID">@hashuid(@UIDROOT,this)</e>
@@ -45,6 +31,7 @@
   <e en="T" t="00080070" n="Manufacturer">@keep()</e>
   <e en="T" t="00080080" n="InstitutionName">@remove()</e>
   <e en="T" t="00080081" n="InstitutionAddress">@remove()</e>
+  <e en="F" t="00080082" n="InstitutionCodeSeq">@remove()</e>
   <e en="T" t="00080090" n="ReferringPhysicianName">@empty()</e>
   <e en="T" t="00080092" n="ReferringPhysicianAddress">@remove()</e>
   <e en="T" t="00080094" n="ReferringPhysicianPhoneNumbers">@remove()</e>
@@ -78,6 +65,8 @@
   <e en="T" t="00083010" n="IrradiationEventUID">@hashuid(@UIDROOT,this)</e>
   <e en="T" t="00084000" n="IdentifyingComments">@remove()</e>
   <e en="T" t="00089123" n="CreatorVersionUID">@hashuid(@UIDROOT,this)</e>
+  <e en="F" t="0008103e" n="SeriesDescription">@keep()</e>
+  <e en="F" t="00081090" n="ManufacturerModelName">@keep()</e>
   <e en="T" t="00100010" n="PatientName">@always()@lookup(PatientID,ptid)</e>
   <e en="T" t="00100020" n="PatientID">@always()@lookup(this,ptid)</e>
   <e en="T" t="00100021" n="IssuerOfPatientID">@remove()</e>
@@ -116,6 +105,9 @@
   <e en="T" t="00102297" n="ResponsiblePerson">@remove()</e>
   <e en="T" t="00102299" n="ResponsibleOrganization">@remove()</e>
   <e en="T" t="00104000" n="PatientComments">@remove()</e>
+  <e en="F" t="00120030" n="ClinicalTrialSiteID">@remove()</e>
+  <e en="F" t="00120031" n="ClinicalTrialSiteName">@remove()</e>
+  <e en="F" t="00120040" n="ClinicalTrialSubjectID">@remove()</e>
   <e en="T" t="00120062" n="PatientIdentityRemoved">@always()YES</e>
   <e en="T" t="00120063" n="DeIdentificationMethod">@always()@append(){CTP: @param(@PROFILENAME): @date():@time()}</e>
   <e en="T" t="00130010" n="BlockOwner">@always()CTP</e>
@@ -154,12 +146,14 @@
   <e en="T" t="00203404" n="ModifyingDeviceManufacturer">@remove()</e>
   <e en="T" t="00203406" n="ModifiedImageDescription">@remove()</e>
   <e en="T" t="00204000" n="ImageComments">@remove()</e>
+  <e en="F" t="00209158" n="FrameComments">@remove()</e>
   <e en="T" t="00209161" n="ConcatenationUID">@hashuid(@UIDROOT,this)</e>
   <e en="T" t="00209164" n="DimensionOrganizationUID">@hashuid(@UIDROOT,this)</e>
   <e en="T" t="00280303" n="LongitudinalTemporalInformationModified">@keep()</e>
   <e en="T" t="00281199" n="PaletteColorLUTUID">@hashuid(@UIDROOT,this)</e>
   <e en="T" t="00281214" n="LargePaletteColorLUTUid">@hashuid(@UIDROOT,this)</e>
   <e en="T" t="00284000" n="ImagePresentationComments">@remove()</e>
+  <e en="F" t="00280301" n="BurnedInAnnotation">@keep()</e>
   <e en="T" t="00320012" n="StudyIDIssuer">@remove()</e>
   <e en="T" t="00320032" n="StudyVerifiedDate">@keep()</e>
   <e en="T" t="00320034" n="StudyReadDate">@keep()</e>
@@ -176,6 +170,7 @@
   <e en="T" t="00321064" n="Requested Procedure Code Sequence">@remove()</e>
   <e en="T" t="00321070" n="RequestedContrastAgent">@remove()</e>
   <e en="T" t="00324000" n="StudyComments">@remove()</e>
+  <e en="F" t="00380004" n="RefPatientAliasSeq">@remove()</e>
   <e en="T" t="00380010" n="AdmissionID">@remove()</e>
   <e en="T" t="00380011" n="IssuerOfAdmissionID">@remove()</e>
   <e en="T" t="0038001a" n="ScheduledAdmissionDate">@keep()</e>
@@ -194,6 +189,11 @@
   <e en="T" t="00380500" n="PatientState">@remove()</e>
   <e en="T" t="00381234" n="ReferencedPatientAliasSeq">@remove()</e>
   <e en="T" t="00384000" n="VisitComments">@remove()</e>
+  <e en="F" t="00400003" n="SPSStartTime">@keep()</e>
+  <e en="F" t="00400005" n="SPSEndTime">@keep()</e>
+  <e en="F" t="00400245" n="PPSStartTime">@keep()</e>
+  <e en="F" t="00401001" n="RequestedProcedureID">@remove()</e>
+  <e en="F" t="0040a073" n="VerifyingObserverSeq">@remove()</e>
   <e en="T" t="00400001" n="ScheduledStationAET">@remove()</e>
   <e en="T" t="00400002" n="SPSStartDate">@keep()</e>
   <e en="T" t="00400004" n="SPSEndDate">@keep()</e>
