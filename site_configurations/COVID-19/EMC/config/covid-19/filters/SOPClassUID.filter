@@ -1,0 +1,3 @@
+// This is a filter for contrast study
+SOPClassUID.equals("1.2.840.10008.5.1.4.1.1.2") // Accept CT Image Storage
++ SOPClassUID.equals("1.2.840.10008.5.1.4.1.1.12.1") // Accept X-Ray Angiographic Image Storage (DSA)
