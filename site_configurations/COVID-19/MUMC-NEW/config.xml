@@ -1,0 +1,105 @@
+<Configuration>
+    <Server port="80" />
+    <Plugin
+        name="Incoming Audit Log"
+        id="IncomingAuditLog"
+        class="org.rsna.ctp.stdplugins.AuditLog"
+        root="data/audit/incoming" />
+    <Plugin
+        name="Outgoing Audit Log"
+        id="OutgoingAuditLog"
+        class="org.rsna.ctp.stdplugins.AuditLog"
+        root="data/audit/study-info" />
+    <Pipeline name="covid-19-mumc">
+        <ImportService
+			name="Dicom Import Service"
+			id="DicomImportService"
+            class="org.rsna.ctp.stdstages.DicomImportService"
+			root="data/covid-19/roots/DicomImportService"
+			port="1181"
+            logConnections="yes"
+            logDuplicates="no"
+            suppressDuplicates="no"/>
+        <ObjectCache
+            name="Object Cache"
+            class="org.rsna.ctp.stdstages.ObjectCache"
+            id="IncomingData"
+            root="data/covid-19/roots/ObjectCache"/>
+        <DicomAuditLogger
+            name="Incoming Audit Logger"
+            class="org.rsna.ctp.stdstages.DicomAuditLogger"
+            root="data/covid-19/audits/IncomingAuditLogger"
+            auditLogID="IncomingAuditLog"
+            auditLogTags="PatientID;StudyDate;StudyTime;StudyInstanceUID;PatientComments;"
+            cacheID="IncomingData"
+            level="study" />
+        <DicomCorrector
+            name="Dicom Corretor"
+            class="org.rsna.ctp.stdstages.DicomCorrector"
+            root="data/covid-19/roots/DicomCorretor" 
+            quarantine="data/covid-19/quarantines/DicomCorretor"/>
+        <Processor
+            name="SOPClassUID Filter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            script="config/covid-19/filters/SOPClassUID.filter"
+            root="data/covid-19/roots/SOPClassUIDFilter"
+            quarantine="data/covid-19/quarantines/SOPClassUIDFilter" />
+        <Processor
+            name="Series Description Filter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            script="config/covid-19/filters/series-description.filter"
+            root="data/covid-19/roots/SeriesDescriptionFilter"
+            quarantine="data/covid-19/quarantines/SeriesDescriptionFilter" />
+        <DicomAnonymizer
+            name="COVID-19 Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="config/covid-19/scripts/lookup.properties"
+            script="config/covid-19/scripts/covid-anonymizer.script"
+            root="data/covid-19/roots/COVIDAnonymizer"
+            quarantine="data/covid-19/quarantines/COVIDAnonymizer" />
+        <DicomAnonymizer
+            name="Set Patients Comments"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            script="config/covid-19/scripts/set-patient-comments.script"
+            root="data/covid-19/roots/SetPatientsComments"
+            quarantine="data/covid-19/quarantines/SetPatientsComments" />
+        <Processor
+            name="Center Series Description Filter"
+            class="org.rsna.ctp.stdstages.DicomFilter"
+            script="config/covid-19/filters/center-series-description-filter.filter"
+            root="data/covid-19/roots/CenterSeriesDescriptionFilter"
+            quarantine="data/covid-19/quarantines/CenterSeriesDescriptionFilter" />
+        <DicomAnonymizer
+            name="Center Specific Anonymizer"
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            lookupTable="config/covid-19/scripts/lookup.properties"
+            script="config/covid-19/scripts/center-specific-anonymizer.script"
+            root="data/covid-19/roots/CenterSpecificAnonymizer"
+            quarantine="data/covid-19/quarantines/CenterSpecificAnonymizer" />
+        <DicomAuditLogger
+            name="Outgoing Audit Logger"
+            class="org.rsna.ctp.stdstages.DicomAuditLogger"
+            root="data/covid-19/audits/OutgoingAuditLogger"
+            auditLogID="OutgoingAuditLog"
+            auditLogTags="PatientID;StudyDate;StudyTime;StudyInstanceUID;PatientComments;"
+            cacheID="IncomingData"
+            level="study" />
+        <DirectoryStorageService
+            name="Local Storage Export"
+            acceptDuplicates="yes"
+            class="org.rsna.ctp.stdstages.DirectoryStorageService"
+            logDuplicates="no"
+            root="data/covid-19/roots/LocalStorageExport"
+            quarantine="data/covid-19/quarantines/LocalStorageExport"
+            setStandardExtensions="yes"
+            structure="(0010,0020)/(0008,1030)/(0008,103E)/(0008,0060)"
+            whitespaceReplacement="_"/>
+        <HttpExportService
+            name="TraIT XNAT Export"
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            quarantine="data/covid-19/quarantines/TraITXNATExport"
+            root="data/covid-19/roots/TraITXNATExport"
+            sendDigestHeader="yes"
+            url="https://ctp.bmia.nl:443"/>
+    </Pipeline>
+</Configuration>

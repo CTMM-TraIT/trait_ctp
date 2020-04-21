@@ -1,0 +1,61 @@
+<script>  
+  <p t="DUMMYDATE">20200101</p>
+  <p t="DUMMYTIME">150000.000000</p>
+  <p t="PROFILENAME">COVID19_MUMC</p>
+  <e en="T" t="00080012" n="InstanceCreationDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00080013" n="InstanceCreationTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00080020" n="StudyDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00080021" n="SeriesDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00080022" n="AcquisitionDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00080023" n="ContentDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="0008002a" n="AcquisitionDatetime">@param(@DUMMYDATE)</e>
+  <e en="T" t="00080030" n="StudyTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00080031" n="SeriesTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00080032" n="AcquisitionTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00080033" n="ContentTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00080034" n="OverlayTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00080035" n="CurveTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00120063" n="DeIdentificationMethod">@always()@append(){CTP: @param(@PROFILENAME): @date():@param(@DUMMYTIME)}</e>
+  <e en="T" t="00181012" n="DateOfSecondaryCapture">@param(@DUMMYDATE)</e>
+  <e en="T" t="00181014" n="TimeOfSecondaryCapture">@param(@DUMMYTIME)</e>
+  <e en="T" t="00181200" n="DateOfLastCalibration">@param(@DUMMYDATE)</e>
+  <e en="T" t="00181201" n="TimeOfLastCalibration">@param(@DUMMYTIME)</e>
+  <e en="T" t="0018700c" n="DateOfLastDetectorCalibration">@param(@DUMMYDATE)</e>
+  <e en="T" t="0018700e" n="TimeOfLastDetectorCalibration">@param(@DUMMYTIME)</e>
+  <e en="T" t="00189074" n="FrameAcquisitionDatetime">@param(@DUMMYDATE)</e>
+  <e en="T" t="00189151" n="FrameReferenceDatetime">@param(@DUMMYDATE)</e>
+  <e en="T" t="00280303" n="LongitudinalTemporalInformationModified">@always()MODIFIED</e>
+  <e en="T" t="00320032" n="StudyVerifiedDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00320033" n="StudyVerifiedTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00320034" n="StudyReadDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00320035" n="StudyReadTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00321000" n="ScheduledStudyStartDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00321001" n="ScheduledStudyStartTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00321010" n="ScheduledStudyStopDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00321011" n="ScheduledStudyStopTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00321040" n="StudyArrivalDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00321041" n="StudyArrivalTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00321050" n="StudyCompletionDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00321051" n="StudyCompletionTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="0038001a" n="ScheduledAdmissionDate">@remove()</e>
+  <e en="T" t="0038001b" n="ScheduledAdmissionTime">@remove()</e>
+  <e en="T" t="0038001c" n="ScheduledDischargeDate">@remove()</e>
+  <e en="T" t="0038001d" n="ScheduledDischargeTime">@remove()</e>
+  <e en="T" t="00380030" n="DischargeDate">@remove()</e>
+  <e en="T" t="00380032" n="DischargeTime">@remove()</e>
+  <e en="T" t="00400002" n="SPSStartDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00400003" n="SPSStartTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00400004" n="SPSEndDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00400005" n="SPSEndTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00400244" n="PPSStartDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00400245" n="PPSStartTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00400250" n="PPSEndDate">@param(@DUMMYDATE)</e>
+  <e en="T" t="00400251" n="PPSEndTime">@param(@DUMMYTIME)</e>
+  <e en="T" t="00402004" n="IssueDateOfImagingServiceRequest">@remove()</e>
+  <e en="T" t="00402005" n="IssueTimeOfImagingServiceRequest">@remove()</e>
+  <e en="T" t="0040a030" n="VerificationDateTime">@remove()</e>
+  <e en="T" t="0040a032" n="ObservationDateTime">@remove()</e>
+  <e en="T" t="0040a120" n="DateTime">@param(@DUMMYDATE)</e>
+  <e en="T" t="0040a121" n="Date">@param(@DUMMYDATE)</e>
+  <e en="T" t="0040a13a" n="RefDatetime">@param(@DUMMYDATE)</e>
+</script>
