@@ -1,0 +1,9 @@
+<script>  
+  <p t="NOTICE1">IMPORTANT: Extra Center Specific anonimization rules</p>
+  <p t="NOTICE2">IMPORTANT: Do not remove PatientComments, these are needed for XNAT</p>
+  <p t="NOTICE3">IMPORTANT: Do not remove PatientID/PatientName these should be removed in first anonymization step</p>
+  <p t="PROFILENAME"></p>
+  <e en="T" t="00100010" n="PatientName">@require()</e>
+  <e en="T" t="00100020" n="PatientID">@require()</e>
+  <e en="T" t="00104000" n="PatientComments">@require()</e>
+</script>

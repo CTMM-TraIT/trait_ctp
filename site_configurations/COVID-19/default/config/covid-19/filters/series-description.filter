@@ -1,0 +1,11 @@
+//This is a script for filtering out some specific scans that shouldn't be processed of the MRCLEAN study based on SeriesDescription attribute 
+! SeriesDescription.equalsIgnoreCase("Carestream PACS Reports") 
+* !SeriesDescription.equalsIgnoreCase("Dose Report")
+* !SeriesDescription.equalsIgnoreCase("Dose Info")
+* !SeriesDescription.equalsIgnoreCase("Radiation Dose Information")
+* !SeriesDescription.equalsIgnoreCase("Patient Protocol")
+* !SeriesDescription.equalsIgnoreCase("Exam Protocol SR")
+* !SeriesDescription.equalsIgnoreCase("Exam Summary")
+* !SeriesDescription.equalsIgnoreCase("Bayer injection images")
+* !SeriesDescription.equalsIgnoreCase("IMPAX Volume Viewing")
+* !SeriesDescription.equalsIgnoreCase("Results CT Neuro Perfusion")

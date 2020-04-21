@@ -1,0 +1,8 @@
+<!-- Set Trial info en XNAT properties -->
+<script>
+    <p t="PROJECTNAME">COVID-19</p>
+    <e en="T" t="00100020" n="PatientID">@require()</e>
+    <e en="T" t="00131010" n="ProjectName">@require()</e>
+    <e en="T" t="00080060" n="Modality">@require()</e>
+    <e en="T" t="00104000" n="PatientComments">@always()Project:@param(@PROJECTNAME);Subject:@param(@PROJECTNAME)_@contents(PatientID,"\\s+","");Session:@param(@PROJECTNAME)_@contents(PatientID,"\\s+","")_@contents(Modality,"\\s+","")_@hash(StudyInstanceUID,4)</e>
+</script>
