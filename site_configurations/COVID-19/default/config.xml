@@ -16,10 +16,22 @@
 			id="DicomImportService"
             class="org.rsna.ctp.stdstages.DicomImportService"
 			root="data/covid-19/roots/DicomImportService"
-			port="1181"
+			port="104"
             logConnections="yes"
             logDuplicates="no"
             suppressDuplicates="no"/>
+        <DirectoryImportService
+            name="DirectoryImportService"
+            id="stage ID"
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            root="data/covid-19/roots/DirectoryImportService"
+            import="data/covid-19/IMPORT"
+            interval="1000"
+            acceptDicomObjects="yes"
+            acceptXmlObjects="no"
+            acceptZipObjects="no"
+            acceptFileObjects="no" 
+            quarantine="data/covid-19/quarantines/DirectoryImportService" />
         <ObjectCache
             name="Object Cache"
             class="org.rsna.ctp.stdstages.ObjectCache"
